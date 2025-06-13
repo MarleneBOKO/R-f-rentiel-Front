@@ -181,23 +181,34 @@ export const defaultMethods = {
     });
     return result;
   },
-  getItemId(array, item) {
-    for (let i = 0; i < array.length; i++) {
-      const element = array[i];
-      if (element.name) {
-        if (element.name == item) return element._id;
-      } else if (element.firstName) {
-        if (`${element.firstName} ${element.lastName}` == item)
-          return element._id;
-      } else if (element.fullName) {
-        if (element.fullName == item) {
-          if (element._id) return element._id;
-          if (element.id) return element.id;
-        }
+getItemId(array, item) {
+  console.log('[getItemId] item reçu :', item);
+
+  for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    if (element.name) {
+      if (element.name == item) {
+        console.log('[getItemId] Match avec name:', element);
+        return element._id;
+      }
+    } else if (element.firstName) {
+      if (`${element.firstName} ${element.lastName}` == item) {
+        console.log('[getItemId] Match avec firstName + lastName:', element);
+        return element._id;
+      }
+    } else if (element.fullName) {
+      if (element.fullName == item) {
+        console.log('[getItemId] Match avec fullName:', element);
+        if (element._id) return element._id;
+        if (element.id) return element.id;
       }
     }
-    return undefined;
-  },
+  }
+
+  console.warn('[getItemId] Aucun match trouvé pour :', item);
+  return undefined;
+},
+
   getItemsId(array, items) {
     // alert(JSON.stringify(items));
     const result = [];
@@ -372,3 +383,27 @@ export const rules = {
 Ce champ est obligatoire`,
   email: (v) => /.+@.+\..+/.test(v) || "L'email doit être valide",
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

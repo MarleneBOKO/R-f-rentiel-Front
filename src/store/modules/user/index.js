@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import newInstanceAxios from "axios";
+//import { get } from "core-js/core/dict";
 
 const state = {
     UserProfile: {},
@@ -36,6 +37,7 @@ const state = {
     fmpFacture: [],
     userListe: [],
     agency: [],
+    ParametreRecours: [],
     garagisteListe: [],
     batch: [],
     litigation: [],
@@ -83,6 +85,8 @@ const getters = {
     pool: (state) => state.pool,
     bodyStudyOfferDatas: (state) => state.bodyStudyOfferDatas,
     agency: (state) => state.agency,
+        ParametreRecours: (state) => state.ParametreRecours,
+
     totalFmp: (state) => state.totalFmp,
     litigation: (state) => state.litigation,
     batch: (state) => state.batch,
@@ -200,6 +204,9 @@ const mutations = {
     },
     SET_AGENCY(state, data) {
         state.agency = data;
+    },
+      SET_PARAMETRERECOURS(state, data) {
+        state.ParametreRecours = data;
     },
     SET_FACTURE(state, data) {
         state.fmpFacture = data;
@@ -540,6 +547,21 @@ const actions = {
                 });
         });
     },
+    getParametreRecours({ commit }) {
+          return new Promise((resolve, reject) => {
+            axios
+                .get("/ParametreRecours")
+                .then((res) => {
+                    // alert(JSON.stringify(res.data.data.docs));
+                    commit("SET_PARAMETRERECOURS", res.data.data);
+                    resolve(res.data.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    },
     getCaptureInventaire({ commit }, { years = "", statusSearch = "" }) {
         return new Promise((resolve, reject) => {
             // inventoryCaptured
@@ -634,10 +656,12 @@ const actions = {
                     `/appeal?periodStartDate=${periodStartDate}&periodEndDate=${periodEndDate}&appealExerciseDateStart=${appealExerciseDateStart}&appealExerciseDateEnd=${appealExerciseDateEnd}&fileName=${fileName}&sinisterNumber=${sinisterNumber}&status=${status}`
                 )
                 .then((res) => {
+                    console.log("Réponse de l'API /appeal :", res.data.data);
                     commit("SET_STATISTIQUE_FILE", res.data.link);
                     // alert(JSON.stringify(res.data.data));
                     commit("SET_RECOURS", res.data.data);
                     resolve(res.data.data);
+
                 })
                 .catch((err) => {
                     console.log(err);
@@ -645,6 +669,7 @@ const actions = {
                 });
         });
     },
+
     getStatRecour({ commit }, {
         status = "",
         returnType = "",
@@ -662,10 +687,12 @@ const actions = {
                     `/appeal?withoutPeriod=true&status=${status}&returnType=${returnType}&thirdPartyCompany=${thirdPartyCompanies}&periodStartDate=${periodStartDate}&periodEndDate=${periodEndDate}&appealExerciseDateStart=${appealExerciseDateStart}&appealExerciseDateEnd=${appealExerciseDateEnd}&collectionDateStart=${collectionDateStart}&collectionDateEnd=${collectionDateEnd}`
                 )
                 .then((res) => {
+  
                     commit("SET_STATISTIQUE_FILE", res.data.link);
                     // alert(JSON.stringify(res.data.data));
                     commit("SET_RECOURS", res.data.data);
                     resolve(res.data.data);
+
                 })
                 .catch((err) => {
                     console.log(err);
@@ -1963,3 +1990,29 @@ export default {
     mutations,
     actions,
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

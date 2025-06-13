@@ -1193,6 +1193,8 @@ export const updateRecours = ({ schema, id }) => {
                 // alert(JSON.stringify(res));
                 // alert(JSON.stringify(res));
                 resolve(res.data);
+                                    console.log("Réponse de l'API /appeal update :", res.data.data);
+
             },
             (error) => {
                 reject(error);

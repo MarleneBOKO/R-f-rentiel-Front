@@ -8,7 +8,7 @@
                   class="mt-1"
                 ></v-img>
               </v-col>
-            </v-row> 
+            </v-row> 	
           </v-card> -->
 
   <v-container fluid>
@@ -195,12 +195,9 @@
                   <v-text-field label="Taux de responsabilité " color="#3A1C71" filled type="number"
                     v-model="adnewObject.victimResponsibilityRate"></v-text-field>
                 </v-col>
-             <v-col cols="12" sm="12" md="3">
+                <v-col cols="12" sm="12" md="3">
                   <v-select :items="agencyrNameList" filled label="Compagnie" color="#3A1C71"
-                    v-model="adnewObject.thirdPartyCompany" @change="valueChange()"></v-select>
-
-
-
+                    v-model="adnewObject.thirdPartyCompany"></v-select>
                 </v-col>
                 <v-col cols="12" sm="12" md="12">
                   <v-text-field label="Motif de responsabilité" color="#3A1C71" filled
@@ -227,7 +224,7 @@
                 </v-col>
                 <!-- etude offre est devenue date règlement -->
                 <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="Date règlement" color="#3A1C71" filled type="date"  @change="valueChange()"
+                  <v-text-field label="Date règlement" color="#3A1C71" filled type="date"
                     v-model="adnewObject.studyOffer"></v-text-field>
                 </v-col>
 
@@ -236,24 +233,22 @@
                     v-model="adnewObject.amountToCollect"></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="Date exercice recours / réception" color="#3A1C71" filled  @change="onExerciseDateChange()"
+                  <v-text-field label="Date exercice recours / réception" color="#3A1C71" filled @change="valueChange()"
                     type="date" v-model="adnewObject.appealExerciseDate"></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="Date encaissement / payement" color="#3A1C71" filled 
+                  <v-text-field label="Date encaissement / payement" color="#3A1C71" filled @change="valueChange()"
                     type="date" v-model="adnewObject.collectionDate"></v-text-field>
                 </v-col>
 
                 <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="Montant encaissé" color="#3A1C71" filled  type="number"
+                  <v-text-field label="Montant encaissé" color="#3A1C71" filled @change="valueChange()" type="number"
                     v-model="adnewObject.amountCollected"></v-text-field>
                 </v-col>
-               
                 <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="Reste à encaisser" color="#3A1C71" @change="valueChange()" filled disabled background-color="#4DD0E1"
+                  <v-text-field label="Reste à encaisser" color="#3A1C71" filled disabled background-color="#4DD0E1"
                     type="number" v-model="adnewObject.remainToCollect"></v-text-field>
                 </v-col>
-                 
                 <v-col cols="12" sm="6" md="3">
                   <v-select label="type de recours " color="#3A1C71" filled :items="StatusIiems"
                     v-model="adnewObject.returnType"></v-select>
@@ -276,6 +271,15 @@
                           : null
                   " v-model="adnewObject.beneficiaryName" color="#3A1C71" filled></v-select>
                 </v-col>
+                <!-- <v-col cols="12" sm="6" md="3">
+                                          <v-select
+                                            label="Béneficiaire recours"
+                                            color="#3A1C71"
+                                            filled
+                                            v-model="adnewObject.benificiary"
+                                            :items="agencyrNameList"
+                                          ></v-select>
+                                        </v-col> -->
                 <v-col cols="12" sm="6" md="3">
                   <v-text-field label="Taux d'encaissement" color="#3A1C71" filled disabled background-color="#4DD0E1"
                     type="number" v-model="adnewObject.collectionRate"></v-text-field>
@@ -284,14 +288,6 @@
                   <v-text-field label="Date premier relance" color="#3A1C71" filled @change="valueChange()" type="date"
                     disabled background-color="#4DD0E1" v-model="adnewObject.firstReminderDate"></v-text-field>
                 </v-col>
-                 <template v-slot:append>
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-icon v-on="on" color="info">mdi-information</v-icon>
-          </template>
-          <span>Calculée automatiquement : +2 mois après date exercice</span>
-        </v-tooltip>
-      </template>
                 <v-col cols="12" sm="6" md="3">
                   <v-text-field label="Date deuxieme relance" color="#3A1C71" filled @change="valueChange()" type="date"
                     disabled background-color="#4DD0E1" v-model="adnewObject.secondReminderDate"></v-text-field>
@@ -309,10 +305,6 @@
                     v-model="adnewObject.observation"></v-text-field>
                 </v-col>
               </v-row>
-               <v-alert v-if="Number(adnewObject.remainToCollect) <= 0" type="success" dense>
-  Tous les paiements ont été effectués.
-</v-alert>
-
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -322,12 +314,6 @@
               <v-btn color="success darken-1" @click="addPvFormModal()">
                 Enregistrer le dossier
               </v-btn>
-              <v-expansion-panels v-if="$store.state.debug" class="mt-5">
-  <v-expansion-panel>
-    <v-expansion-panel-header>Debug - Dates et Notifications</v-expansion-panel-header>
-    
-  </v-expansion-panel>
-</v-expansion-panels>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -485,6 +471,7 @@ import {
 } from "@/api/user.js";
 export default {
   name: "recoursComponent",
+
   data: () => ({
     dialog: false,
     dialogDelete: false,
@@ -496,39 +483,7 @@ export default {
     itemSelect: {},
     sinsiterSelectId: "",
     excelFile: null,
-    adnewObject: {
-        payments: [], // Initialiser payments en tant que tableau vide
-      amountCollected: 0, // Initialiser les autres propriétés si nécessaire
-      amountPayed: 0,
-      amountRequestQuote: 0,
-      amountToCollect: 0,
-      appealExerciseDate: null,
-      beneficiaryName: "",
-      beneficiaryType: "",
-      collectionDate: null,
-      collectionRate: "0.00",
-      expertise: "",
-      firstReminderDate: null,
-      motifResponsabilteAssure: "",
-      motifResponsabilteTier: "",
-      observation: "",
-      penaltyAmount: 0,
-      remainToCollect: 0,
-      responsibilityRate: 0,
-      returnType: "",
-      secondReminderDate: null,
-      sinisterVictim: null,
-      studyOffer: null,
-      thirdPartyCompany: null,
-      thirdReminderDate: null,
-      victimConductorName: "",
-      victimFullName: "",
-      victimPoliceNumber: null,
-      victimRegistration: "",
-      victimResponsibilityRate: 0,
-      victimSinisterNumber: "",
-      victimVehicleBrand: "",
-    },
+    adnewObject: {},
     returnType: "",
     showText: true,
     showSelect: false,
@@ -546,7 +501,7 @@ export default {
     pageCount: 0,
     pageCounts: 0,
     page: 1,
-     appealExerciseDateStart: "",
+    appealExerciseDateStart: "",
     appealExerciseDateEnd: "",
     periodStartDate: "",
     periodEndDate: "",
@@ -568,8 +523,7 @@ export default {
       "Réclamation de la période",
       "Prévision recours",
       "Recours encaissé",
-      "Paiement de la période",
-       "Paiement partiel",
+      "Paiement de la période"
     ],
     headers: [
       {
@@ -819,29 +773,6 @@ export default {
     formTitle() {
       return this.editedIndex === -1 ? "New Item" : "Edit Item";
     },
-
- /*remainingToCollect() {
-      if (!this.adnewObject || !this.adnewObject.remainToCollect) {
-        return 0; // Ou une autre valeur par défaut
-      }
-
-      const amountToCollect = this.adnewObject.remainToCollect;
-
-      if (!this.adnewObject.payments || this.adnewObject.payments.length === 0) {
-        return amountToCollect; // Aucun paiement pour l'instant, donc le montant restant est le montant total
-      }
-
-      const totalPayments = this.adnewObject.payments.reduce((sum, payment) => {
-        let paymentAmountValue = 0; // Initialiser avec une valeur par défaut
-        if (payment && payment.paymentAmount !== null && payment.paymentAmount !== undefined) {
-          paymentAmountValue = payment.paymentAmount;
-        }
-        return sum + paymentAmountValue;
-      }, 0);
-      return amountToCollect - totalPayments;
-    },*/
-
-
   },
 
   watch: {
@@ -863,9 +794,6 @@ export default {
     victimeListe() {
       this.victimeNameList = defaultMethods.getNameList(this.victimeListe);
     },
-
-    
-    
   },
 
   // created() {
@@ -873,11 +801,10 @@ export default {
   // },
   mounted() {
     this.initFiles();
-   
   },
   methods: {
     ...mapActions([
-      "getRecour",  
+      "getRecour",
       "getVictimesDoc",
       "getUserProfile",
       "getProduct",
@@ -888,56 +815,39 @@ export default {
       "getAgency",
       "getDocAvis",
       "getDocAppeal",
-      "getParametreRecoursFromBackend",
     ]),
     showAllFillData() {
       this.initFiles();
       //alert(this.showAllFil);
     },
-
-
-
-    
-        async initFiles() {
-          this.loading = true;
-          // alert(this.status)
-          try {
-            await this.getRecour({
-              appealExerciseDateStart: this.appealExerciseDateStart,
-              appealExerciseDateEnd: this.appealExerciseDateEnd,
-              periodStartDate: this.periodStartDate,
-              periodEndDate: this.periodEndDate,
-              fileName: this.fileName,
-              withoutPeriod: this.showAllFil,
-              sinisterNumber: this.sinisterNumber,
-              status: this.status,
-            });
-            await this.getUserProfile();
-            await this.getProduct();
-            // await this.getVictimes({});
-            await this.getEnquetteur();
-            await this.getCommissariat();
-            await this.getAgency();
-          } catch (error) {
-            defaultMethods.dispatchError(
-              this.$store,
-              messages.failedToLoad("les dossiers")
-            );
-          }
-          this.loading = false;
-        },
-    async getParametreRecoursFromBackend() {
-  try {
-    const response = await this.$store.dispatch("getParametreRecours");
-    return response || { joursEntreRelances: 30, nombreRelanceAvantPenalite: 3, tauxPenalite: 3 };
-  } catch (err) {
-    console.error("Erreur chargement paramètres recours:", err);
-    return { joursEntreRelances: 30, nombreRelanceAvantPenalite: 3, tauxPenalite: 3 };
-  }
-},
-
-
-
+    async initFiles() {
+      this.loading = true;
+      // alert(this.status)
+      try {
+        await this.getRecour({
+          appealExerciseDateStart: this.appealExerciseDateStart,
+          appealExerciseDateEnd: this.appealExerciseDateEnd,
+          periodStartDate: this.periodStartDate,
+          periodEndDate: this.periodEndDate,
+          fileName: this.fileName,
+          withoutPeriod: this.showAllFil,
+          sinisterNumber: this.sinisterNumber,
+          status: this.status,
+        });
+        await this.getUserProfile();
+        await this.getProduct();
+        // await this.getVictimes({});
+        await this.getEnquetteur();
+        await this.getCommissariat();
+        await this.getAgency();
+      } catch (error) {
+        defaultMethods.dispatchError(
+          this.$store,
+          messages.failedToLoad("les dossiers")
+        );
+      }
+      this.loading = false;
+    },
     async FileSelecterTrue() {
       if (!this.excelFile) {
         alert("S'il vous plaît sélectionner un fichier excel");
@@ -1005,25 +915,7 @@ export default {
       });
       this.loading = false;
     },
-    handleCompanyChange(value) {
-    // Si value est un objet, extraire l'ID
-    if (value && typeof value === 'object' && value._id) {
-      this.adnewObject.thirdPartyCompany = value._id;
-    }
-    console.log("Compagnie sélectionnée:", this.adnewObject.thirdPartyCompany);
-  },
-  
-  // Assurez-vous que cette méthode est appelée lorsque vous chargez les données
-  normalizeData() {
-    // Assurez-vous que thirdPartyCompany est au bon format
-    if (this.adnewObject && this.adnewObject.thirdPartyCompany) {
-      // Si c'est un objet, extrayez l'ID
-      if (typeof this.adnewObject.thirdPartyCompany === 'object' && this.adnewObject.thirdPartyCompany._id) {
-        this.adnewObject.thirdPartyCompany = this.adnewObject.thirdPartyCompany._id;
-      }
-    }
-  },
-    /*valueChange() {
+    valueChange() {
       // alert(this.adnewObject.firstReminderDate);
       this.adnewObject.collectionRate = Math.round(
         (this.adnewObject.amountCollected / this.adnewObject.amountToCollect) *
@@ -1105,146 +997,7 @@ export default {
           this.showSelect = true;
         }
       }
-
-
-      const amountToCollect = Number(this.adnewObject.amountToCollect) || 0;
-  const amountCollected = Number(this.adnewObject.amountCollected) || 0;
-  this.adnewObject.remainToCollect = amountToCollect - amountCollected;
-  
-  // Calculer le taux d'encaissement
-  if (amountToCollect > 0) {
-    this.adnewObject.collectionRate = ((amountCollected / amountToCollect) * 100).toFixed(2);
-  } else {
-    this.adnewObject.collectionRate = 0;
-  }
-  
-  // Si la date de règlement est renseignée, supprimer les notifications pour ce dossier
- if (this.adnewObject.studyOffer) {
-    this.removeNotificationsForDossier(this.adnewObject.recoureId);
-  }
-    }*/
-
-// Méthode valueChange() - SEULEMENT pour les calculs, PAS pour ajouter des paiements
-valueChange() {
-  // Gestion des dates de rappel
-  if (this.adnewObject.appealExerciseDate != null) {
-    var d = new Date(this.adnewObject.appealExerciseDate);
-    var m = d.getMonth() + 2;
-    d.setMonth(m);
-
-    if (this.adnewObject.firstReminderDate === '') {
-      this.adnewObject.firstReminderDate = d
-        .toLocaleDateString("fr")
-        .split("/")
-        .reverse()
-        .join("-");
-      m = d.getMonth() + 1;
-      d.setMonth(m);
-    }
-
-    if (this.adnewObject.secondReminderDate === '') {
-      this.adnewObject.secondReminderDate = d
-        .toLocaleDateString("fr")
-        .split("/")
-        .reverse()
-        .join("-");
-      m = d.getMonth() + 1;
-      d.setMonth(m);
-    }
-
-    if (this.adnewObject.thirdReminderDate === '') {
-      this.adnewObject.thirdReminderDate = d
-        .toLocaleDateString("fr")
-        .split("/")
-        .reverse()
-        .join("-");
-    }
-  }
-
-  // SEULEMENT calculer le reste à encaisser basé sur les paiements existants
-  this.calculateTotals();
-
-  // Gestion de l'affichage selon le type de bénéficiaire
-  this.handleBeneficiaryTypeChange();
-  
-  // S'assurer que la compagnie reste affichée
-  this.ensureCompanyDisplay();
-},
-
-// Méthode pour calculer les totaux
-calculateTotals() {
-  const amountToCollect = Number(this.adnewObject.amountToCollect) || 0;
-  
-  // Initialiser le tableau des paiements s'il n'existe pas
-  if (!this.adnewObject.payments) {
-    this.adnewObject.payments = [];
-  }
-  
-  // Calculer le total des paiements existants
-  const totalPayments = this.adnewObject.payments.reduce((sum, payment) => {
-    return sum + (Number(payment.paymentAmount) || 0);
-  }, 0);
-
-  // Calculer le reste à encaisser
-  this.adnewObject.remainToCollect = amountToCollect - totalPayments;
-
-  // Calculer le taux de recouvrement
-  this.adnewObject.collectionRate =  Math.round((totalPayments / amountToCollect) * 100)
-
-
-},
-
-// Nouvelle méthode pour gérer les changements de type de bénéficiaire
-handleBeneficiaryTypeChange() {
-  if (this.adnewObject.beneficiaryType === "Autres ...") {
-    this.showText = true;
-    this.showSelect = false;
-  } else {
-    this.showText = false;
-    this.showSelect = true;
-    
-    // Définir le type d'expert selon la sélection
-    switch(this.adnewObject.beneficiaryType) {
-      case "Expert":
-        this.isExpert = "Expert";
-        break;
-      case "Victime":
-        this.isExpert = "Victime";
-        break;
-      case "Compagnie":
-        this.isExpert = "Compagnie";
-        break;
-      default:
-        this.isExpert = null;
-    }
-  }
-},
-
-// Nouvelle méthode pour s'assurer que la compagnie s'affiche correctement
-ensureCompanyDisplay() {
-  // Vérifier si thirdPartyCompany existe et l'afficher
-  if (this.adnewObject.thirdPartyCompany) {
-    console.log('Compagnie détectée:', this.adnewObject.thirdPartyCompany);
-    
-    // S'assurer que la compagnie est dans le bon format pour l'affichage
-    if (typeof this.adnewObject.thirdPartyCompany === 'object' && this.adnewObject.thirdPartyCompany._id) {
-      // Si c'est un objet, s'assurer qu'il a les propriétés nécessaires pour l'affichage
-      console.log('Compagnie (objet):', {
-        id: this.adnewObject.thirdPartyCompany._id,
-        name: this.adnewObject.thirdPartyCompany.name || this.adnewObject.thirdPartyCompany.companyName,
-      });
-    } else if (typeof this.adnewObject.thirdPartyCompany === 'string') {
-      console.log('Compagnie (ID):', this.adnewObject.thirdPartyCompany);
-   
-    }
-  } else {
-    console.log('Aucune compagnie sélectionnée');
-  }
-},
-
-
-
-
+    },
     handleClick(item) {
       // alert(JSON.stringify(item));
       this.adnewObject.sinisterNumber = item.sinisterVictim.sinister.sinisterNumber;
@@ -1260,14 +1013,6 @@ ensureCompanyDisplay() {
       this.adnewObject.victimeVehicleBrand = item.sinisterVictim.vehicleBrand;
       this.adnewObject.victimeRegistration = item.sinisterVictim.vehicleRegistration;
       this.adnewObject.victimeResponsibilityRate = item.sinisterVictim.responsibilityRate;
-      this.adnewObject.payments = (item.payments || []).filter(
-  (payment, index, self) =>
-    index === self.findIndex(p =>
-      p.paymentAmount === payment.paymentAmount &&
-      p.paymentDate === payment.paymentDate
-    )
-);
-
       // this.adnewObject.victimeSinisterNumber = item.sinisterVictim.sinisterNumber;
 
       // alert(JSON.stringify(item.sinisterVictim.thirdPartyCompany.name))
@@ -1291,10 +1036,7 @@ ensureCompanyDisplay() {
       this.adnewObject.victimSinisterNumber = item.victimSinisterNumber;
       this.adnewObject.victimConductorName = item.victimConductorName;
       this.adnewObject.victimFullName = item.victimFullName;
-      //this.adnewObject.thirdPartyCompany = item.thirdPartyCompany ? item.thirdPartyCompany.name : "";
- this.adnewObject.thirdPartyCompany = item.thirdPartyCompany || null;
-
-
+      this.adnewObject.thirdPartyCompany = item.thirdPartyCompany ? item.thirdPartyCompany.name : "";
       this.adnewObject.agentName = item.agentName;
       this.adnewObject.motifResponsabilteAssure = item.motifResponsabilteAssure;
       this.adnewObject.motifResponsabilteTier = item.motifResponsabilteTier;
@@ -1304,8 +1046,8 @@ ensureCompanyDisplay() {
       this.adnewObject.studyOffer = item.studyOffer;
       this.adnewObject.amountToCollect = item.amountToCollect;
       this.adnewObject.appealExerciseDate = item.appealExerciseDate;
-      //this.adnewObject.collectionDate = item.collectionDate;
-      //this.adnewObject.amountCollected = item.amountCollected;
+      this.adnewObject.collectionDate = item.collectionDate;
+      this.adnewObject.amountCollected = item.amountCollected;
       this.adnewObject.remainToCollect = item.remainToCollect;
       this.adnewObject.returnType = item.returnType;
       this.adnewObject.responsibilityRate = item.responsibilityRate;
@@ -1323,8 +1065,6 @@ ensureCompanyDisplay() {
       this.adnewObject.recoureId = item._id;
       this.adnewObject.sinisterID = item.sinister._id;
       this.valueChange();
-      this.calculateTotals();
-
       // this.editedIndex = this.adnewObject.indexOf(item);
       // this.adnewObject = Object.assign({}, item);
       this.addFile = true;
@@ -1459,485 +1199,82 @@ ensureCompanyDisplay() {
       }
       this.loading = false;
     },
-  // 1. Méthode améliorée pour gérer les objets Vue réactifs
-validateAndGetCompanyId() {
-  console.log('=== VALIDATION COMPANY ID ===');
-  
-  // Vérifier si on a une valeur
-  if (!this.adnewObject.thirdPartyCompany) {
-    console.log('Aucune compagnie sélectionnée');
-    return null;
-  }
-  
-  // Vérifier si la liste des agences est chargée
-  if (!this.agency || !Array.isArray(this.agency) || this.agency.length === 0) {
-    console.error('Liste des agences non chargée ou vide');
-    return this.adnewObject.thirdPartyCompany;
-  }
-  
-  // Si c'est déjà un ID (string), vérifier s'il existe dans la liste
-  if (typeof this.adnewObject.thirdPartyCompany === 'string') {
-    const foundItem = this.agency.find(item => item._id === this.adnewObject.thirdPartyCompany);
-    if (foundItem) {
-      console.log('ID trouvé dans la liste. Nom:', foundItem.name);
-      console.log('ID retourné:', this.adnewObject.thirdPartyCompany);
-      
-      // Retourner directement l'ID string, pas l'objet
-      return this.adnewObject.thirdPartyCompany;
-    } else {
-      console.warn('ID non trouvé dans la liste locale:', this.adnewObject.thirdPartyCompany);
-      return this.adnewObject.thirdPartyCompany;
-    }
-  }
-  
-  // Si c'est un objet, extraire l'ID
-  if (typeof this.adnewObject.thirdPartyCompany === 'object') {
-    console.log('Objet détecté, extraction de l\'ID');
-    return this.adnewObject.thirdPartyCompany._id;
-  }
-  
-  // Fallback
-  return this.adnewObject.thirdPartyCompany;
-},
+    async addPvFormModal() {
+      this.loading = true;
+      // alert(JSON.stringify(this.adnewObject.beneficiaryName));
+      try {
+        const schema = {
+          // policeStation: defaultMethods.getItemId(
+          //   this.Commissariat,
+          //   this.adnewObject.policeStation
+          // ),
+          sinisterVictim: this.adnewObject.sinsterVictimeID,
+          // studyOffer: this.adnewObject.studyOffer,
+          amountRequestQuote: this.adnewObject.amountRequestQuote,
 
-// 2. Fonction utilitaire pour éviter les objets Vue réactifs
-getPlainObject(obj) {
-  if (!obj) return null;
-  
-  // Si c'est déjà une string (ID), la retourner
-  if (typeof obj === 'string') return obj;
-  
-  // Si c'est un objet, créer une copie plain
-  if (typeof obj === 'object') {
-    return JSON.parse(JSON.stringify(obj));
-  }
-  
-  return obj;
-},
+          victimSinisterNumber: this.adnewObject.victimSinisterNumber,
+          victimFullName: this.adnewObject.victimFullName,
+          victimConductorName: this.adnewObject.victimConductorName,
+          victimPoliceNumber: this.adnewObject.victimPoliceNumber,
+          victimVehicleBrand: this.adnewObject.victimVehicleBrand,
+          victimRegistration: this.adnewObject.victimRegistration,
+          motifResponsabilteAssure: this.adnewObject.motifResponsabilteAssure,
+          motifResponsabilteTier: this.adnewObject.motifResponsabilteTier,
+          victimResponsibilityRate: this.adnewObject.victimResponsibilityRate,
+          thirdPartyCompany: defaultMethods.getItemId(
+            this.agency,
+            this.adnewObject.thirdPartyCompany
+          ),
 
-async addPvFormModal() {
-  this.loading = true;
 
-  try {
-    // Obtenir l'ID de la compagnie
-    let companyId = null;
-    if (this.adnewObject.thirdPartyCompany) {
-      if (typeof this.adnewObject.thirdPartyCompany === 'string') {
-        companyId = this.adnewObject.thirdPartyCompany;
-      } else if (typeof this.adnewObject.thirdPartyCompany === 'object') {
-        companyId = this.adnewObject.thirdPartyCompany._id;
+          amountPayed: this.adnewObject.amountPayed,
+          expertise: this.adnewObject.expertise,
+          studyOffer: this.adnewObject.studyOffer,
+          amountToCollect: Number(this.adnewObject.amountToCollect),
+          appealExerciseDate: this.adnewObject.appealExerciseDate,
+          collectionDate: this.adnewObject.collectionDate,
+          amountCollected: Number(this.adnewObject.amountCollected),
+          remainToCollect: Number(this.adnewObject.remainToCollect),
+          // expertise: this.adnewObject.expertise =="Oui" ? true : false,
+          returnType: this.adnewObject.returnType,
+          responsibilityRate: this.adnewObject.responsibilityRate,
+          beneficiaryType: this.adnewObject.beneficiaryType,
+
+          beneficiaryName: this.adnewObject.beneficiaryName,
+          // benificiaryId: this.adnewObject.benificiaryId,
+          collectionRate: this.adnewObject.collectionRate
+            ? this.adnewObject.collectionRate
+            : 0,
+          firstReminderDate: this.adnewObject.firstReminderDate,
+          secondReminderDate: this.adnewObject.secondReminderDate,
+          thirdReminderDate: this.adnewObject.thirdReminderDate,
+          penaltyAmount: this.adnewObject.penaltyAmount,
+          observation: this.adnewObject.observation,
+        };
+
+        if (this.adnewObject.recoureId) {
+          await updateRecours({
+            schema,
+            id: this.adnewObject.recoureId,
+          });
+          this.updateFileVictime();
+          defaultMethods.dispatchSuccess(
+            this.$store,
+            messages.updatedSuccessfully("Dossier")
+          );
+        }
+        // this.closeMail();
+        // this.initialize();
+      } catch (error) {
+        defaultMethods.dispatchError(this.$store);
       }
-    }
-
-    // Initialiser le tableau des paiements s'il n'existe pas
-    if (!this.adnewObject.payments) {
-      this.adnewObject.payments = [];
-    }
-
-    const remainToCollect = Number(this.adnewObject.remainToCollect || 0);
-
-    const currentPaymentAmount = Number(this.adnewObject.amountCollected) || 0;
-    const currentPaymentDate = this.adnewObject.collectionDate;
-
-    // ✅ Si reste à collecter > 0, on ajoute le paiement
-    if (remainToCollect > 0 && currentPaymentAmount > 0 && currentPaymentDate) {
-      const isAlreadyInList = this.adnewObject.payments.some(p =>
-        Number(p.paymentAmount) === currentPaymentAmount &&
-        p.paymentDate === currentPaymentDate
-      );
-
-      if (!isAlreadyInList) {
-        this.adnewObject.payments.push({
-          paymentAmount: currentPaymentAmount,
-          paymentDate: currentPaymentDate,
-          createdBy: this.currentUserId
-        });
-
-        console.log('Nouveau paiement ajouté:', {
-          paymentAmount: currentPaymentAmount,
-          paymentDate: currentPaymentDate
-        });
-      } else {
-        console.log('Paiement déjà existant, pas d\'ajout');
-      }
-
-      // ✅ Recalculer les totaux seulement si paiement ajouté
-      this.calculateTotals();
-    } else if (remainToCollect <= 0) {
-      console.log("Tout a été payé, pas d'ajout de paiement ni de recalcul.");
-    }
-
-    // Réinitialiser les champs de paiement
-    this.adnewObject.amountCollected = '';
-    this.adnewObject.collectionDate = '';
-
-    // ⚙️ Gestion relance pour NSIA
-    if (
-      this.adnewObject.appealExerciseDate &&
-      !this.adnewObject.collectionDate &&
-      this.adnewObject.beneficiaryName?.toUpperCase().includes("NSIA")
-    ) {
-      const param = await this.getParametreRecoursFromBackend();
-      const exerciseDate = new Date(this.adnewObject.appealExerciseDate);
-      const today = new Date();
-      const diffDays = Math.floor((today - exerciseDate) / (1000 * 60 * 60 * 24));
-
-      if (diffDays > (param.nombreRelanceAvantPenalite * param.joursEntreRelances)) {
-        const penalty = (param.tauxPenalite / 100) * Number(this.adnewObject.amountToCollect || 0);
-        this.adnewObject.penaltyAmount = penalty.toFixed(2);
-      } else {
-        this.adnewObject.penaltyAmount = 0;
-      }
-
-      const interval = param.joursEntreRelances || 30;
-      const baseDate = new Date(this.adnewObject.appealExerciseDate);
-      this.adnewObject.firstReminderDate = this.addDays(baseDate, interval * 2);
-      this.adnewObject.secondReminderDate = this.addDays(baseDate, interval * 3);
-      this.adnewObject.thirdReminderDate = this.addDays(baseDate, interval * 4);
-    } else {
-      this.adnewObject.firstReminderDate = null;
-      this.adnewObject.secondReminderDate = null;
-      this.adnewObject.thirdReminderDate = null;
-      this.adnewObject.penaltyAmount = 0;
-    }
-
-    // Nettoyer les _id des paiements avant envoi
-    const cleanedPayments = this.adnewObject.payments.map(p => {
-      const copy = { ...p };
-      delete copy._id;
-      copy.createdBy = this.currentUserId;
-      return copy;
-    });
-
-    // Préparation du schéma
-    const schema = {
-      sinisterVictim: this.adnewObject.sinsterVictimeID,
-      amountRequestQuote: this.adnewObject.amountRequestQuote,
-      victimSinisterNumber: this.adnewObject.victimSinisterNumber,
-      victimFullName: this.adnewObject.victimFullName,
-      victimConductorName: this.adnewObject.victimConductorName,
-      victimPoliceNumber: this.adnewObject.victimPoliceNumber,
-      victimVehicleBrand: this.adnewObject.victimVehicleBrand,
-      victimRegistration: this.adnewObject.victimRegistration,
-      motifResponsabilteAssure: this.adnewObject.motifResponsabilteAssure,
-      motifResponsabilteTier: this.adnewObject.motifResponsabilteTier,
-      victimResponsibilityRate: this.adnewObject.victimResponsibilityRate,
-      thirdPartyCompany: companyId,
-      amountPayed: this.adnewObject.amountPayed,
-      expertise: this.adnewObject.expertise,
-      studyOffer: this.adnewObject.studyOffer,
-      amountToCollect: Number(this.adnewObject.amountToCollect),
-      appealExerciseDate: this.adnewObject.appealExerciseDate,
-      collectionDate: this.adnewObject.collectionDate,
-      amountCollected: Number(this.adnewObject.amountCollected),
-      payments: cleanedPayments,
-      remainToCollect: Number(this.adnewObject.remainToCollect),
-      returnType: this.adnewObject.returnType,
-      responsibilityRate: this.adnewObject.responsibilityRate,
-      beneficiaryType: this.adnewObject.beneficiaryType,
-      beneficiaryName: this.adnewObject.beneficiaryName,
-      collectionRate: this.adnewObject.collectionRate ? this.adnewObject.collectionRate : 0,
-      firstReminderDate: this.adnewObject.firstReminderDate,
-      secondReminderDate: this.adnewObject.secondReminderDate,
-      thirdReminderDate: this.adnewObject.thirdReminderDate,
-      penaltyAmount: this.adnewObject.penaltyAmount,
-      observation: this.adnewObject.observation,
-    };
-
-    if (this.adnewObject.recoureId) {
-      await updateRecours({ schema, id: this.adnewObject.recoureId });
-      console.log('Recours mis à jour avec succès.');
-    } else {
-      console.log('Création d\'un nouveau recours');
-    }
-
-    this.dialog = false;
-    this.initFiles();
-
-  } catch (error) {
-    console.error('Erreur lors de l\'enregistrement du recours:', error);
-    const errorMessage = error?.response?.data?.error || error?.message || "Erreur inconnue.";
-    this.$toast.error(errorMessage);
-  } finally {
-    this.loading = false;
-  }
-},
-
-
-
-
-
-// 4. Méthode pour initialiser correctement les données
-initializeAdnewObject(data = {}) {
-  this.adnewObject = {
-    sinsterVictimeID: data.sinsterVictimeID || null,
-    amountRequestQuote: data.amountRequestQuote || 0,
-    victimSinisterNumber: data.victimSinisterNumber || '',
-    victimFullName: data.victimFullName || '',
-    victimConductorName: data.victimConductorName || '',
-    victimPoliceNumber: data.victimPoliceNumber || '',
-    victimVehicleBrand: data.victimVehicleBrand || '',
-    victimRegistration: data.victimRegistration || '',
-    motifResponsabilteAssure: data.motifResponsabilteAssure || '',
-    motifResponsabilteTier: data.motifResponsabilteTier || '',
-    victimResponsibilityRate: data.victimResponsibilityRate || 0,
-    
-
-    
-    // S'assurer que thirdPartyCompany est bien un ID
-    thirdPartyCompany: this.extractId(data.thirdPartyCompany),
-    
-    amountPayed: data.amountPayed || 0,
-    expertise: data.expertise || null,
-    studyOffer: data.studyOffer || null,
-    amountToCollect: data.amountToCollect || 0,
-    appealExerciseDate: data.appealExerciseDate || null,
-    collectionDate: data.collectionDate || null,
-    amountCollected: data.amountCollected || 0,
-    remainToCollect: data.remainToCollect || 0,
-    returnType: data.returnType || '',
-    responsibilityRate: data.responsibilityRate || 0,
-    beneficiaryType: data.beneficiaryType || '',
-    beneficiaryName: data.beneficiaryName || '',
-    collectionRate: data.collectionRate || 0,
-    firstReminderDate: data.firstReminderDate || null,
-    secondReminderDate: data.secondReminderDate || null,
-    thirdReminderDate: data.thirdReminderDate || null,
-    penaltyAmount: data.penaltyAmount || 0,
-    observation: data.observation || '',
-    recoureId: data.recoureId || null,
-  };
-},
-
-// 5. Fonction utilitaire pour extraire l'ID
-extractId(value) {
-  if (!value) return null;
-  if (typeof value === 'string') return value;
-  if (typeof value === 'object' && value._id) return value._id;
-  return null;
-},
-
-// 6. Computed property pour le v-select
-computed: {
-  selectedThirdPartyCompany: {
-    get() {
-      return this.extractId(this.adnewObject?.thirdPartyCompany);
+      this.loading = false;
+      this.addFile = false;
+      this.addFileExcel = false;
+      this.dialog = false;
+      this.dialogDelete = false;
+      this.initFiles();
     },
-    
-    set(value) {
-      if (!this.adnewObject) {
-        this.adnewObject = {};
-      }
-      this.$set(this.adnewObject, 'thirdPartyCompany', value);
-      console.log('Nouvelle compagnie sélectionnée:', value);
-    }
-  }
-},
-
-// 7. Pour déboguer davantage
-debugCompanySelection() {
-  console.log('=== DEBUG DÉTAILLÉ ===');
-  console.log('1. adnewObject.thirdPartyCompany:', this.adnewObject.thirdPartyCompany);
-  console.log('2. Type:', typeof this.adnewObject.thirdPartyCompany);
-  
-  if (this.agency && this.adnewObject.thirdPartyCompany) {
-    const searchId = this.extractId(this.adnewObject.thirdPartyCompany);
-    console.log('3. ID à rechercher:', searchId);
-    
-    const foundItem = this.agency.find(item => item._id === searchId);
-    console.log('4. Item trouvé (objet complet):', foundItem);
-    
-    if (foundItem) {
-      console.log('5. Nom de la compagnie:', foundItem.name);
-      console.log('6. ID de la compagnie:', foundItem._id);
-    }
-  }
-},
-
-
-
-calculateReminderDates(exerciseDate) {
-  if (!exerciseDate) {
-    return {
-      firstReminderDate: null,
-      secondReminderDate: null,
-      thirdReminderDate: null
-    };
-  }
-
-  const baseDate = new Date(exerciseDate);
-  
-  // Premier relance : +2 mois
-  const firstReminder = new Date(baseDate);
-  firstReminder.setMonth(firstReminder.getMonth() + 2);
-  
-  // Deuxième relance : +3 mois
-  const secondReminder = new Date(baseDate);
-  secondReminder.setMonth(secondReminder.getMonth() + 3);
-  
-  // Troisième relance : +4 mois
-  const thirdReminder = new Date(baseDate);
-  thirdReminder.setMonth(thirdReminder.getMonth() + 4);
-  
-  return {
-    firstReminderDate: firstReminder.toISOString().split('T')[0],
-    secondReminderDate: secondReminder.toISOString().split('T')[0],
-    thirdReminderDate: thirdReminder.toISOString().split('T')[0]
-  };
-},
-
-
-// 2. Méthode déclenchée quand la date d'exercice change
-/*onExerciseDateChange() {
-  console.log('Date exercice changée:', this.adnewObject.appealExerciseDate);
-  
-  if (this.adnewObject.appealExerciseDate) {
-    const reminderDates = this.calculateReminderDates(this.adnewObject.appealExerciseDate);
-    
-    // Mettre à jour les dates de relance automatiquement
-    this.adnewObject.firstReminderDate = reminderDates.firstReminderDate;
-    this.adnewObject.secondReminderDate = reminderDates.secondReminderDate;
-    this.adnewObject.thirdReminderDate = reminderDates.thirdReminderDate;
-    console.log('Dates de relance calculées:', reminderDates);
-  } else {
-    // Si pas de date d'exercice, vider les dates de relance
-    this.adnewObject.firstReminderDate = null;
-    this.adnewObject.secondReminderDate = null;
-    this.adnewObject.thirdReminderDate = null;
-  }
-  
-  // Recalculer les autres valeurs si nécessaire
-  this.valueChange();
-},*/
-
-addDays(date, days) {
-  const newDate = new Date(date);
-  newDate.setDate(newDate.getDate() + days);
-  return newDate.toISOString().split("T")[0];
-},
-
-
-async onExerciseDateChange() {
-  const beneficiary = this.adnewObject.beneficiaryName;
-
-  if (beneficiary && beneficiary.toUpperCase().includes("NSIA Assurances")) {
-    const param = await this.getParametreRecoursFromBackend();
-
-    const baseDate = new Date(this.adnewObject.appealExerciseDate);
-    const interval = param.joursEntreRelances || 30;
-
-    this.adnewObject.firstReminderDate = this.addDays(baseDate, interval * 2); // 60 jours
-    this.adnewObject.secondReminderDate = this.addDays(baseDate, interval * 3); // 90 jours
-    this.adnewObject.thirdReminderDate = this.addDays(baseDate, interval * 4); // 120 jours
-  } else {
-    this.adnewObject.firstReminderDate = null;
-    this.adnewObject.secondReminderDate = null;
-    this.adnewObject.thirdReminderDate = null;
-  }
-},
-
-
-
-
-// 3. Méthode pour vérifier les notifications à afficher
-checkPendingNotifications() {
-  const today = new Date().toISOString().split('T')[0];
-  const notifications = [];
-  
-  // Pour chaque dossier de recours actif
-  this.files.forEach(file => {
-    // Vérifier si la date de règlement n'est pas renseignée
-    if (!file.studyOffer || file.studyOffer === '') {
-      
-      // Vérifier première relance
-      if (file.firstReminderDate && file.firstReminderDate <= today) {
-        notifications.push({
-          type: 'first_reminder',
-          message: `Première relance due pour le dossier ${file.victimSinisterNumber || file.id}`,
-          dossier: file,
-          date: file.firstReminderDate
-        });
-      }
-      
-      // Vérifier deuxième relance
-      if (file.secondReminderDate && file.secondReminderDate <= today) {
-        notifications.push({
-          type: 'second_reminder',
-          message: `Deuxième relance due pour le dossier ${file.victimSinisterNumber || file.id}`,
-          dossier: file,
-          date: file.secondReminderDate
-        });
-      }
-      
-      // Vérifier troisième relance
-      if (file.thirdReminderDate && file.thirdReminderDate <= today) {
-        notifications.push({
-          type: 'third_reminder',
-          message: `Troisième relance due pour le dossier ${file.victimSinisterNumber || file.id}`,
-          dossier: file,
-          date: file.thirdReminderDate
-        });
-      }
-    }
-  });
-  
-  return notifications;
-},
-// 4. Méthode pour mettre à jour la liste des notifications
-updateNotifications() {
-  const pendingNotifications = this.checkPendingNotifications();
-  
-  // Mettre à jour la liste des todos (notifications)
-  this.todos = pendingNotifications.map(notif => ({
-    id: `${notif.type}_${notif.dossier.id}`,
-    message: notif.message,
-    type: notif.type,
-    date: notif.date,
-    dossier: notif.dossier,
-    read: false
-  }));
-  
-  console.log('Notifications mises à jour:', this.todos);
-},
-
-
-
-// 6. Méthode pour marquer une notification comme lue
-markNotificationAsRead(notificationId) {
-  const notif = this.todos.find(t => t.id === notificationId);
-  if (notif) {
-    notif.read = true;
-  }
-},
-
-// 7. Méthode pour ouvrir un dossier depuis une notification
-openDossierFromNotification(notification) {
-  // Charger le dossier concerné
-  this.initializeAdnewObject(notification.dossier);
-  this.dialog = true; // Ouvrir le modal d'édition
-  
-  // Marquer la notification comme lue
-  this.markNotificationAsRead(notification.id);
-},
-
-
-// 9. Méthode pour vérifier périodiquement les notifications (optionnel)
-startNotificationCheck() {
-  // Vérifier les notifications toutes les heures
-  setInterval(() => {
-    this.updateNotifications();
-  }, 60 * 60 * 1000); // 1 heure
-},
-
-// 10. Dans mounted(), démarrer la vérification
-mounted() {
-  this.initFiles();
-  this.startNotificationCheck();
-  
-  // Vérifier les notifications immédiatement
-  this.updateNotifications();
-},
-
   },
 };
 </script>
@@ -2267,7 +1604,3 @@ td {
   box-shadow: inset 0 0 1em #3a1c71, 0 0 2em #eeeeee;
 }
 </style>
-
-
-
-

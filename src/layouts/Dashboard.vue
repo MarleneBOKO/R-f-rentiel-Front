@@ -372,44 +372,75 @@
         background: linear-gradient(to right, #4DD0E1, #3A1C71);" height="60" width="100%">
             <h2 class="titleAlert">Demande client</h2>
 
-            <v-btn icon class=" shake elevation-0 mr-5" flat small>
-              <v-badge overlap color="error" :content="todos.length">
-                <v-icon color="white" class="mr-2">mdi-bell-alert-outline</v-icon></v-badge>
-            </v-btn>
+       <v-btn icon class="shake elevation-0 mr-5" flat small @click="showNotifications = !showNotifications">
+  <v-badge overlap color="error" :content="unreadNotificationsCount" v-if="unreadNotificationsCount > 0">
+    <v-icon color="white" class="mr-2">mdi-bell-alert-outline</v-icon>
+  </v-badge>
+  <v-icon color="white" class="mr-2" v-else>mdi-bell-outline</v-icon>
+</v-btn>
+
+    <!-- Menu des notifications -->
+    <v-menu v-model="showNotifications" :close-on-content-click="false" offset-y max-width="400">
+      <v-card>
+        <v-card-title class="pb-2">
+          <span class="text-h6">Notifications ({{ unreadNotificationsCount }})</span>
+          <v-spacer></v-spacer>
+          <v-btn icon small @click="showNotifications = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-title>
+
+        <v-divider></v-divider>
+
+        <!-- Liste des notifications -->
+        <v-list v-if="todos.length > 0" max-height="300" style="overflow-y: auto;">
+          <v-list-item
+            v-for="notification in todos"
+            :key="notification.id"
+            @click="markNotificationAsRead(notification.id)"
+            :class="{ 'grey lighten-4': notification.read }"
+          >
+            <v-list-item-avatar>
+              <v-icon :color="notification.read ? 'grey' : 'error'">
+                {{
+                  notification.type === 'first_reminder' ? 'mdi-numeric-1-circle' :
+                  notification.type === 'second_reminder' ? 'mdi-numeric-2-circle' :
+                  'mdi-numeric-3-circle'
+                }}
+              </v-icon>
+            </v-list-item-avatar>
+
+            <v-list-item-content>
+              <v-list-item-title class="text-wrap">
+                {{ notification.message }}
+              </v-list-item-title>
+              <v-list-item-subtitle>
+                Date: {{ notification.date }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+
+            <v-list-item-action>
+              <v-btn icon small @click.stop="markNotificationAsRead(notification.id)">
+                <v-icon>mdi-check</v-icon>
+              </v-btn>
+            </v-list-item-action>
+          </v-list-item>
+        </v-list>
+
+        <!-- Aucun résultat -->
+        <v-card-text v-else class="text-center grey--text">
+          Aucune notification
+        </v-card-text>
+      </v-card>
+    </v-menu>
+             
           </v-sheet>
 
-          <v-list v-if="todos.length != 0" class="pl-0 pt-20 " style=" overflow: hidden !important" shaped>
 
-            <v-card flat class="ma-0" v-for="(todo) in todos" v-bind:data="todo" v-bind:key="todo._id">
-              <v-sheet flat :class="{
-                'alertList--red': todo.isCompleted === false && todo.isSented === false && todo.isConfirmed === false,
-                'alertList--yellow': todo.isCompleted === true && todo.isSented === false && todo.isConfirmed === false,
-                'alertList--green': todo.isCompleted === false && todo.isSented === false && todo.isConfirmed === true
-              }">
-                <v-list-item-subtitle class="text-wrap">N° Sin: {{
-                  todo.sinisterVictim &&
-                  todo.sinisterVictim.sinister ? todo.sinisterVictim.sinister.sinisterNumber : ""
-                }}
-                </v-list-item-subtitle>
-                <v-list-item-subtitle class="text-wrap">Nom victime: {{
-                  todo.sinisterVictim ? todo.sinisterVictim.fullName : ""
-                }}
-                </v-list-item-subtitle>
-                <v-list-item-title class="text-wrap-title mb-3">{{
-                  todo.complaint
-                }}</v-list-item-title>
-                <v-list-item-subtitle class="text-wrap">Demander le: {{ todo.createdAt }}
-                </v-list-item-subtitle>
-                <v-list-item-subtitle class="text-wrap">Demander par: {{ todo.name }}
-                </v-list-item-subtitle>
-                <v-list-item-subtitle class="text-wrap">Contact: {{ todo.phone }}
-                </v-list-item-subtitle>
 
-              </v-sheet>
-            </v-card>
 
-          </v-list>
-          <v-list v-else class="pl-0 pt-20 " style=" overflow: hidden !important" shaped>
+    
+          <v-list class="pl-0 pt-20 " style=" overflow: hidden !important" shaped>
             <v-img src="../assets/noPiority.png" max-height="200px" width="100%" alt="logo"></v-img>
           </v-list>
         </v-navigation-drawer>
@@ -1278,6 +1309,7 @@ export default {
   name:'DashboardComponent',
   data: () => ({
     tab: null,
+    showNotifications: false,
     text:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     drawer: true,
@@ -1439,17 +1471,16 @@ export default {
       "Party",
     ],
   }),
-  mounted() {
-    this.$refs.calendar.checkChange();
-
-    this.getUserProfile();
-
-    document.body.style.zoom = "80%";
-    if (this.isAdmin) {
-      this.getAdminProfile();
-    }
-    // this.initpriority();
-  },
+mounted() {
+  console.log("Mounted hook appelé"); // Ajouter cette ligne
+    this.loadNotifications();
+  this.$refs.calendar.checkChange();
+  this.getUserProfile();
+  document.body.style.zoom = "80%";
+  if (this.isAdmin) {
+    this.getAdminProfile();
+  }
+},
   created() {
     this.getPlaintListe();
   },
@@ -1467,9 +1498,12 @@ export default {
       if (this.UserProfile && this.UserProfile._id) return this.UserProfile;
       else return this.AdminProfile;
     },
+    unreadNotificationsCount() {
+      return this.todos.filter(n => !n.read).length;
+    },
   },
   methods: {
-    ...mapActions(["getAdminProfile", "getUserProfile", "getPlaint"]),
+    ...mapActions(["getAdminProfile", "getUserProfile", "getRecour", "getPlaint"]),
     reaction() {
       if (this.SizeDrawer == "60" && this.hide == false) {
         this.iconRow = "mdi-arrow-right-drop-circle-outline";
@@ -1485,6 +1519,93 @@ export default {
         this.hides = true;
       }
     },
+
+
+
+async loadNotifications() {
+  console.log("🔄 Chargement des notifications...");
+
+  try {
+    const files = await this.getRecour({
+      appealExerciseDateStart: "",
+      appealExerciseDateEnd: "",
+      fileName: "",
+      sinisterNumber: "",
+      status: "",
+      periodStartDate: "",
+      periodEndDate: ""
+    });
+
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+
+    const notifications = [];
+
+    files.forEach((file) => {
+      ['firstReminderDate', 'secondReminderDate', 'thirdReminderDate'].forEach((field, i) => {
+        const rawDate = file[field];
+
+        if (rawDate) {
+          const reminderDate = new Date(rawDate);
+          const reminderDateStr = reminderDate.toISOString().split('T')[0];
+
+          if (reminderDateStr === todayStr) {
+            notifications.push({
+              id: `${['first', 'second', 'third'][i]}_${file._id}`,
+              message: `${['Première', 'Deuxième', 'Troisième'][i]} relance due pour le dossier ${file.sinisterNumber || file._id}`,
+              type: `${['first', 'second', 'third'][i]}_reminder`,
+              date: rawDate,
+              read: false
+            });
+          }
+        }
+      });
+    });
+
+    // 💾 Charger les notifications déjà marquées comme lues depuis localStorage
+    const readIds = JSON.parse(localStorage.getItem('readNotifications') || '[]');
+
+    // 🔄 Appliquer l'état "lu" à celles déjà lues
+    notifications.forEach(notif => {
+      if (readIds.includes(notif.id)) {
+        notif.read = true;
+      }
+    });
+
+    this.todos = notifications;
+
+    console.log("✅ Notifications chargées :", this.todos);
+  } catch (error) {
+    console.error("❌ Erreur lors du chargement des notifications :", error);
+  }
+},
+
+
+
+
+//marquer la notificaion comme lue
+markNotificationAsRead(id) {
+  const notif = this.todos.find(n => n.id === id);
+  if (notif && !notif.read) {
+    notif.read = true;
+
+    // Sauvegarde dans le localStorage
+    const readIds = JSON.parse(localStorage.getItem('readNotifications') || '[]');
+    if (!readIds.includes(id)) {
+      readIds.push(id);
+      localStorage.setItem('readNotifications', JSON.stringify(readIds));
+    }
+  }
+},
+
+
+
+
+
+
+
+
+
     async getPlaintListe() {
 
       await this.getPlaint({
@@ -1924,3 +2045,8 @@ export default {
   }
 }
 </style>
+
+
+
+
+
