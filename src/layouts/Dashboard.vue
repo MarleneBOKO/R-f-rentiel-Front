@@ -152,6 +152,20 @@
 
                 <v-list-item-title>Référentiel</v-list-item-title>
               </v-list-item>
+<v-list-item route to="/demandecheque" class="menuButton" active-class="menuButton"> 
+  <v-list-item-icon>
+    <v-icon>mdi-cash-check</v-icon> <!-- Argent / Demande -->
+  </v-list-item-icon>
+  <v-list-item-title>Demande Mercure</v-list-item-title>
+</v-list-item>
+
+         <v-list-item route to="/listingdegat" class="menuButton" active-class="menuButton">
+  <v-list-item-icon>
+    <v-icon>mdi-file-document-outline</v-icon> <!-- Rapport -->
+  </v-list-item-icon>
+  <v-list-item-title>Rapport</v-list-item-title>
+</v-list-item>
+
               <v-list-item route to="/pv" class="menuButton" active-class="menuButton">
                 <v-list-item-icon>
                   <v-icon>mdi-police-badge-outline</v-icon>
@@ -293,7 +307,13 @@
 
                 <v-list-item-title>Référentiel</v-list-item-title>
               </v-list-item>
+              <v-list-item route to="/demandecheque" class="menuButton" active-class="menuButton">
+                <v-list-item-icon>
+                  <v-icon>mdi-police-badge-outline</v-icon>
+                </v-list-item-icon>
 
+                <v-list-item-title>Demande Mercure</v-list-item-title>
+              </v-list-item>
               <v-list-item route to="/pv" class="menuButton" active-class="menuButton">
                 <v-list-item-icon>
                   <v-icon>mdi-police-badge-outline</v-icon>
@@ -1358,6 +1378,14 @@ export default {
       {
         title: "Référentiel",
         route: "/management",
+        isAdmin: true,
+        isUser: true,
+        icon: "mdi-alert-outline",
+      },
+
+      {
+        title: "Demande Mercure",
+        route: "/demandecheque",
         isAdmin: true,
         isUser: true,
         icon: "mdi-alert-outline",

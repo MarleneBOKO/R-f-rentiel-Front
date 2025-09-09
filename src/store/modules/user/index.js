@@ -1200,25 +1200,32 @@ const actions = {
                 });
         });
     },
+    
     printOfferDoc({ commit }, { ids = [] }) {
-        return new Promise((resolve, reject) => {
-            // alert(JSON.stringify(ids));
+ return new Promise((resolve, reject) => {
+ if (!ids || ids.length === 0) {
+ return reject(new Error("Aucun ID sélectionné"));
+ }
 
-            axios
-                .get(`/check/print-check-request-slip?ids=${JSON.stringify(ids)}`)
-                .then((res) => {
-                    // alert(JSON.stringify(res.data));
-                    window.open(res.data.data, "_blank");
-                    window.open(res.data.link, "_blank");
-                    commit();
-                    resolve(res.data.data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                    reject(err);
-                });
-        });
-    },
+ const formattedIds = encodeURIComponent(JSON.stringify(ids));
+
+ axios
+ .get(`/check/print-check-request-slip?ids=${formattedIds}`)
+ .then((res) => {
+  window.open(res.data.data, "_blank");
+  if (res.data.link) {
+  window.open(res.data.link, "_blank");
+  }
+  commit(); // si inutile, tu peux le retirer
+  resolve(res.data.data);
+ })
+ .catch((err) => {
+  console.error("Erreur lors de l'impression :", err);
+  reject(err);
+ });
+ });
+},
+
     getMail({ commit }, {
         receptionDateStart = "",
         receptionDateEnd = "",
@@ -1508,26 +1515,26 @@ const actions = {
                 });
         });
     },
-    // getDocFmp({ commit }, { id = "", ids = [] }) {
-    //     // alert(id);
-    //     return new Promise((resolve, reject) => {
-    //         axios
-    //             .get(`fmp/${id}/print-fmp-document?ids=${JSON.stringify(ids)}`)
-    //             .then((res) => {
-    //                 // alert(JSON.stringify(res.data.data));
-    //                 window.open(res.data.data, "_blank");
-    //                 commit("SET_FILES_MANAGE", res.data.data);
-    //                 resolve(res.data.data);
-    //             })
-    //             .catch((err) => {
-    //                 console.log(err);
-    //                 reject(err);
-    //             });
-    //     });
-    // },
+    getDocFmp({ commit }, { id = "", ids = [] }) {
+     // alert(id);
+         return new Promise((resolve, reject) => {
+        axios.get(`fmp/${id}/print-fmp-document?selectedBatchIds=${ids.join(',')}`)
+
+                .then((res) => {
+                 // alert(JSON.stringify(res.data.data));
+                window.open(res.data.data, "_blank");
+                    commit("SET_FILES_MANAGE", res.data.data);
+                    resolve(res.data.data);
+                })
+              .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    },
 
 
-    getDocFmp({ commit }, { id = "", ids = [], amountDueToTheCompany }) {
+    /*getDocFmp({ commit }, { id = "", ids = [], amountDueToTheCompany }) {
   return new Promise((resolve, reject) => {
     // Ajouter le montant comme paramètre de requête si défini
     const queryParams = `ids=${JSON.stringify(ids)}${amountDueToTheCompany !== undefined ? `&amountDueToTheCompany=${amountDueToTheCompany}` : ''}`;
@@ -1536,6 +1543,10 @@ const actions = {
       .get(`fmp/${id}/print-fmp-document?${queryParams}`)
       .then((res) => {
         console.log("Réponse de l'API pour le bordereau:", res.data);
+        console.log(">>> Appel de getDocFmp avec les paramètres suivants :");
+console.log("ID FMP sélectionné :", this.adnewObject._id);
+console.log("Montant dû à la compagnie :", this.adnewObject?.amountDueToTheCompany);
+
         window.open(res.data.data, "_blank");
         commit("SET_FILES_MANAGE", res.data.data);
         resolve(res.data.data);
@@ -1545,7 +1556,10 @@ const actions = {
         reject(err);
       });
   });
-},
+},*/
+
+
+
     getDocAvis({ commit }, { id = "", signataire = "" }) {
         // alert(id);
         return new Promise((resolve, reject) => {
@@ -1598,6 +1612,8 @@ const actions = {
             .get("/user/profile")
             .then((res) => {
                 // alert(JSON.stringify(res));
+                console.log("Profil utilisateur :", res.data);
+                console.log("Contenu complet de user :", res.data.user);
                 commit("SET_USER_PROFILE", res.data.user);
             })
             .catch((err) => {
@@ -1859,6 +1875,19 @@ const actions = {
                     commit("SET_STATISTIQUE_FILE_RECAP", res.data.linkReferentiel);
 
                     resolve(res.data.data);
+                    console.log("Données envoyées dans la requête :", {
+  declarationDateStart,
+  declarationDateEnd,
+  openingDateStart,
+  openingDateEnd,
+  sinisterDateStart,
+  sinisterDateDateEnd,
+  product,
+  inventoryStatus,
+  broker,
+  thirdPartyCompany
+});
+
                 })
                 .catch((err) => {
                     commit("SET_FILES", {});

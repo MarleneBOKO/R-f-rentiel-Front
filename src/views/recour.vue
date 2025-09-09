@@ -196,7 +196,7 @@
                     v-model="adnewObject.victimResponsibilityRate"></v-text-field>
                 </v-col>
              <v-col cols="12" sm="12" md="3">
-                  <v-select :items="agencyrNameList" filled label="Compagnie" color="#3A1C71"
+                  <v-select :items="agencyrNameList" filled label="Compagnie Tier" color="#3A1C71"
                     v-model="adnewObject.thirdPartyCompany" @change="valueChange()"></v-select>
 
 
@@ -241,7 +241,7 @@
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
                   <v-text-field label="Date encaissement / payement" color="#3A1C71" filled 
-                    type="date" v-model="adnewObject.collectionDate"></v-text-field>
+                    type="date" v-model="adnewObject.collectionDate"   :value="adnewObject.collectionDate|| 'Aucun paiement'"></v-text-field>
                 </v-col>
 
                 <v-col cols="12" sm="6" md="4">
@@ -309,9 +309,7 @@
                     v-model="adnewObject.observation"></v-text-field>
                 </v-col>
               </v-row>
-               <v-alert v-if="Number(adnewObject.remainToCollect) <= 0" type="success" dense>
-  Tous les paiements ont été effectués.
-</v-alert>
+               
 
             </v-card-text>
             <v-card-actions>
@@ -1260,13 +1258,18 @@ ensureCompanyDisplay() {
       this.adnewObject.victimeVehicleBrand = item.sinisterVictim.vehicleBrand;
       this.adnewObject.victimeRegistration = item.sinisterVictim.vehicleRegistration;
       this.adnewObject.victimeResponsibilityRate = item.sinisterVictim.responsibilityRate;
-      this.adnewObject.payments = (item.payments || []).filter(
+    // Nettoyage doublons paiements
+this.adnewObject.payments = (item.payments || []).filter(
   (payment, index, self) =>
     index === self.findIndex(p =>
       p.paymentAmount === payment.paymentAmount &&
       p.paymentDate === payment.paymentDate
     )
 );
+
+
+
+
 
       // this.adnewObject.victimeSinisterNumber = item.sinisterVictim.sinisterNumber;
 
@@ -1304,8 +1307,8 @@ ensureCompanyDisplay() {
       this.adnewObject.studyOffer = item.studyOffer;
       this.adnewObject.amountToCollect = item.amountToCollect;
       this.adnewObject.appealExerciseDate = item.appealExerciseDate;
-      //this.adnewObject.collectionDate = item.collectionDate;
-      //this.adnewObject.amountCollected = item.amountCollected;
+      this.adnewObject.collectionDate = item.collectionDate;
+      this.adnewObject.amountCollected = item.amountCollected;
       this.adnewObject.remainToCollect = item.remainToCollect;
       this.adnewObject.returnType = item.returnType;
       this.adnewObject.responsibilityRate = item.responsibilityRate;
@@ -1567,10 +1570,7 @@ async addPvFormModal() {
       console.log("Tout a été payé, pas d'ajout de paiement ni de recalcul.");
     }
 
-    // Réinitialiser les champs de paiement
-    this.adnewObject.amountCollected = '';
-    this.adnewObject.collectionDate = '';
-
+ 
     // ⚙️ Gestion relance pour NSIA
     if (
       this.adnewObject.appealExerciseDate &&
@@ -1612,7 +1612,7 @@ async addPvFormModal() {
     // Préparation du schéma
     const schema = {
       sinisterVictim: this.adnewObject.sinsterVictimeID,
-      amountRequestQuote: this.adnewObject.amountRequestQuote,
+        amountRequestQuote: this.adnewObject.amountRequestQuote ? Number(this.adnewObject.amountRequestQuote) : null,
       victimSinisterNumber: this.adnewObject.victimSinisterNumber,
       victimFullName: this.adnewObject.victimFullName,
       victimConductorName: this.adnewObject.victimConductorName,
@@ -1837,10 +1837,75 @@ async onExerciseDateChange() {
 },
 
 
+checkPendingNotifications() {
+  const today = new Date().toISOString().split('T')[0];
+  const notifications = [];
+
+  this.files.forEach(file => {
+    if (!file.studyOffer || file.studyOffer === '') {
+      const thirdReminderDate = file.thirdReminderDate;
+      console.log('ok', file)
+      // 1ère relance
+      if (file.firstReminderDate && file.firstReminderDate <= today) {
+        notifications.push({
+          type: 'first_reminder',
+          message: `Première relance due pour le dossier ${file.victimSinisterNumber || file.id}`,
+          dossier: file,
+          date: file.firstReminderDate
+        });
+      }
+
+      // 2ème relance
+      if (file.secondReminderDate && file.secondReminderDate <= today) {
+        notifications.push({
+          type: 'second_reminder',
+          message: `Deuxième relance due pour le dossier ${file.victimSinisterNumber || file.id}`,
+          dossier: file,
+          date: file.secondReminderDate
+        });
+      }
+
+      // 3ème relance
+      if (thirdReminderDate && thirdReminderDate <= today) {
+        notifications.push({
+          type: 'third_reminder',
+          message: `Troisième relance due pour le dossier ${file.victimSinisterNumber || file.id}`,
+          dossier: file,
+          date: thirdReminderDate
+        });
+
+        // 🔁 Relance périodique après la 3ème, tous les 30 jours
+        const baseDate = new Date(thirdReminderDate);
+        const todayDate = new Date(today);
+        const timeDiff = todayDate - baseDate;
+
+        const daysPassed = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        const interval = 30;
+
+        if (daysPassed > interval) {
+          const reminderCount = Math.floor(daysPassed / interval);
+          const nextReminderDate = new Date(baseDate);
+          nextReminderDate.setDate(baseDate.getDate() + reminderCount * interval);
+
+          if (nextReminderDate.toISOString().split('T')[0] <= today) {
+            notifications.push({
+              type: 'periodic_reminder',
+              message: `Relance périodique #${reminderCount} due pour le dossier ${file.victimSinisterNumber || file.id}`,
+              dossier: file,
+              date: nextReminderDate.toISOString().split('T')[0]
+            });
+          }
+        }
+      }
+    }
+  });
+
+  return notifications;
+},
 
 
 // 3. Méthode pour vérifier les notifications à afficher
-checkPendingNotifications() {
+/*checkPendingNotifications() {
   const today = new Date().toISOString().split('T')[0];
   const notifications = [];
   
@@ -1882,7 +1947,7 @@ checkPendingNotifications() {
   });
   
   return notifications;
-},
+},*/
 // 4. Méthode pour mettre à jour la liste des notifications
 updateNotifications() {
   const pendingNotifications = this.checkPendingNotifications();

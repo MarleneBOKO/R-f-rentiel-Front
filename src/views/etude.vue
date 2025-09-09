@@ -170,6 +170,10 @@
               <v-btn color="success darken-1" @click="addAyantDroit()">
                 Ajouter d'ayant droit
               </v-btn>
+              <v-btn color="success darken-1" class="ml-2" @click="openRapportForm()">
+                Ajouter un rapport
+              </v-btn>
+
             </v-card-title>
             <v-card-text>
               <v-row>
@@ -397,7 +401,7 @@
                     v-model="morePayementStudy.nature"></v-select>
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="Montant" v-model="morePayementStudy.amount" color="#3A1C71" filled
+                  <v-text-field label="MontantA" v-model="morePayementStudy.amount" color="#3A1C71" filled
                     type="number"></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
@@ -785,6 +789,9 @@
               <v-btn color="success darken-1" @click="handleClick('BodyStudy')">
                 Répartition de l'offre
               </v-btn>
+              <v-btn color="success darken-1" class="ml-2" @click="openRapportForm()">
+                Ajouter un rapport
+              </v-btn>
 
             </v-card-title>
             <!-- {{ bodyStudyOfferData }} -->
@@ -1046,6 +1053,65 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+
+
+        <v-dialog v-model="addRapportDialog" max-width="500px">
+        <v-card style="border-left: 10px solid #3A1C71">
+          <v-card-title>
+            <span class="text-h5 mb-5 mt-5" style="color:#3A1C71;">Rapport</span>
+          </v-card-title>
+          <v-card-text>
+            <v-row>
+              <!-- Formulaire identique à dégât -->
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field label="Pièces" v-model="degatData.documents" color="#3A1C71" filled></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field label="Nombre" v-model="degatData.number" color="#3A1C71" filled></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field label="Montant Demandé" color="#3A1C71" filled type="number"
+                  v-model="degatData.amountRequested"></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field label="Montant réglé" v-model="degatData.amountToBePaid" color="#3A1C71" filled></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="12">
+                <v-text-field label="Motif" v-model="degatData.patterns" color="#3A1C71" filled></v-text-field>
+              </v-col>
+
+              <!-- Les deux champs spécifiques au rapport -->
+              <v-col cols="12" sm="6">
+                <v-text-field label="Date de réception du rapport" type="date" v-model="degatData.reportReceivedDate" color="#3A1C71" filled></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field label="Date de traitement du rapport" type="date" v-model="degatData.reportProcessedDate" color="#3A1C71" filled></v-text-field>
+              </v-col>
+
+              <v-col cols="12" sm="6">
+                <v-select
+                  :items="['corporel', 'matériel']"
+                  v-model="degatData.reportType"
+                  label="Type de rapport"
+                  color="#3A1C71"
+                  filled
+                ></v-select>
+              </v-col>
+
+            </v-row>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="error darken-1" class="mr-5" @click="addRapportDialog = false" text>
+              Fermer
+            </v-btn>
+            <v-btn color="success darken-1" @click="submitRapportForm">
+              Enregistrer le rapport
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
         <v-dialog v-model="addFileMaterial" max-width="1200px">
           <v-card style="border-left: 10px solid #3A1C71">
             <v-card-title>
@@ -1057,6 +1123,10 @@
               <v-btn color="success darken-1" @click="addNewDegatToList()">
                 Ajouter un dégat
               </v-btn>
+              <v-btn color="success darken-1" class="ml-2" @click="openRapportForm()">
+                Ajouter un rapport
+              </v-btn>
+
             </v-card-title>
             <v-card-text>
               <v-row>
@@ -1103,6 +1173,8 @@
                     <td>{{ item.amountRequested }}</td>
                     <td>{{ item.amountToBePaid }}</td>
                     <td>{{ item.patterns }}</td>
+                    <td>{{ item.reportReceivedDate }}</td>
+                    <td>{{ item.reportProcessedDate }}</td>
                   </tr>
                 </template>
                 <template v-slot:no-data>
@@ -1177,6 +1249,11 @@
                     v-model="beneficiary.receptionServiceSendDate" color="#3A1C71" filled>
                   </v-text-field>
                 </v-col>
+                <v-col cols="12" sm="6" md="4">
+                  <v-text-field label="Numéro de Demande de Chèque" v-model="beneficiary.demandenumber" background-color="#ffb703"
+                    color="#3A1C71" filled>
+                  </v-text-field>
+                </v-col>
                 <v-col cols="12" sm="6" md="3">
                   <v-text-field label="Numéro chèque" v-model="beneficiary.checkNumber" color="#3A1C71" filled>
                   </v-text-field>
@@ -1193,7 +1270,6 @@
                 <v-col cols="12" sm="6" md="12">
                   <v-textarea v-model="beneficiary.observation" color="#3A1C71" filled label="Observation"></v-textarea>
                 </v-col>
-
               </v-row>
             </v-card-text>
             <v-card-actions>
@@ -1883,6 +1959,7 @@ export default {
       "Expertise amiable",
       // "Contre expertise",
     ],
+      addRapportDialog: false,
     addFile: false,
     page: 1,
     morePayementStudyForm: false,
@@ -5099,6 +5176,32 @@ export default {
         align: "start",
         value: "patterns",
       },
+      {
+        text: "reportReceivedDate",
+        width: "200px",
+        // divider: true,
+        // class: "deep-purple darken-4 white--text",
+        align: "start",
+        value: "reportReceivedDate",
+      },
+      {
+        text: "reportProcessedDate",
+        width: "200px",
+        // divider: true,
+        // class: "deep-purple darken-4 white--text",
+        align: "start",
+        value: "reportProcessedDate",
+      },
+      
+          {
+        text: "Type de rapport",
+        width: "200px",
+        // divider: true,
+        // class: "deep-purple darken-4 white--text",
+        align: "start",
+        value: "reportType",
+      },
+      
     ],
 
     editedIndex: -1,
@@ -5826,6 +5929,13 @@ export default {
       this.degatData = {},
         this.addFileMoreMaterial = true
     },
+
+    openRapportForm() {
+  this.degatData = {}; // Reset le modèle si nécessaire
+  this.addRapportDialog = true;
+},
+
+
     async RemoveAyantDroitModal() {
       // alert(this.matérialSelectedId)
       this.loading = true;
@@ -6797,24 +6907,22 @@ bodyStudyClick(item) {
       // this.adnewObject = Object.assign({}, item);
       this.victimeDialogModal = true;
     },
-    async printComptableDoc() {
-      this.loading = true
-      try {
-        await this.printOfferDoc({
-          ids: defaultMethods.getDocItemsId(this.selected),
-        });
-      } catch (error) {
-        console.log(error)
-      }
-      finally {
-        this.selected = {}
-        this.printDocChèque = false
-        this.loading = false
-
-
-      }
-
-    },
+async printComptableDoc() {
+ this.loading = true;
+ try {
+ const ids = defaultMethods.getDocItemsId(this.selected);
+ if (!ids || ids.length === 0) {
+  throw new Error("Aucun document sélectionné");
+ }
+ await this.printOfferDoc({ commit: () => {} }, { ids });
+ } catch (error) {
+ console.error("Échec de l'impression :", error.message || error);
+ } finally {
+ this.selected = {};
+ this.printDocChèque = false;
+ this.loading = false;
+ }
+},
 
     async pvManageFunction() {
       // await this.getOfferDoc({ printed: !this.singleSelect });
@@ -7622,15 +7730,27 @@ this.deathStudyOfferData.annualIncome =
       this.ayantDroitDataListe.degatID = item._id
       this.addFileMoreDead = true;
     },
-    handleClickDeagat(item) {
-      this.degatData.documents = item.documents;
-      this.degatData.number = item.number;
-      this.degatData.amountRequested = item.amountRequested;
-      this.degatData.amountToBePaid = item.amountToBePaid;
-      this.degatData.patterns = item.patterns;
-      this.degatData.degatID = item._id
-      this.addFileMoreMaterial = true;
-    },
+handleClickDeagat(item) {
+  // Remplir les données communes
+  this.degatData.documents = item.documents;
+  this.degatData.number = item.number;
+  this.degatData.amountRequested = item.amountRequested;
+  this.degatData.amountToBePaid = item.amountToBePaid;
+  this.degatData.patterns = item.patterns;
+  this.degatData.degatID = item._id;
+
+  // Vérifie si c'est un rapport (en détectant la présence des dates)
+  if (item.reportReceivedDate || item.reportProcessedDate) {
+    this.degatData.reportReceivedDate = item.reportReceivedDate;
+    this.degatData.reportProcessedDate = item.reportProcessedDate;
+    this.degatData.reportType = item.reportType;
+
+    this.addRapportDialog = true; // ouvre le formulaire rapport
+  } else {
+    this.addFileMoreMaterial = true; // sinon, formulaire dégât
+  }
+},
+
     async addBeneficiaryProvisionFormModal() {
       this.loading = true;
       // alert( defaultMethods.getItemId(this.BankNameListe, this.beneficiary.bank))
@@ -7713,7 +7833,8 @@ this.deathStudyOfferData.annualIncome =
           studyType: this.typeOfStudy,
           fullName: this.beneficiary.fullName,
           contact: this.beneficiary.contact,
-          observation: this.beneficiary.observation
+          observation: this.beneficiary.observation,
+          demandenumber: this.beneficiary.demandenumber
 
 
         };
@@ -7800,6 +7921,51 @@ this.deathStudyOfferData.annualIncome =
       this.dialogDelete = false;
       this.initFiles();
     },
+
+async submitRapportForm() {
+  this.loading = true;
+  try {
+    const schema = {
+      materialStudy: this.matérialSelectedId,
+      documents: this.degatData.documents,
+      number: this.degatData.number,
+      amountRequested: this.degatData.amountRequested,
+      amountToBePaid: this.degatData.amountToBePaid,
+      patterns: this.degatData.patterns,
+      reportReceivedDate: this.degatData.reportReceivedDate,
+      reportProcessedDate: this.degatData.reportProcessedDate,
+       reportType: this.degatData.reportType,
+    };
+
+    if (this.degatData.degatID) {
+      await updateDegat({
+        schema,
+        id: this.degatData.degatID,
+      });
+
+      defaultMethods.dispatchSuccess(
+        this.$store,
+        messages.updatedSuccessfully("Rapport")
+      );
+    } else {
+      await addDegat({ schema });
+
+      defaultMethods.dispatchSuccess(
+        this.$store,
+        messages.createdSuccessfully("Rapport")
+      );
+    }
+
+    this.reloadMatérialClick(this.bigStudyID);
+    this.addRapportDialog = false;
+  } catch (error) {
+    defaultMethods.dispatchError(this.$store);
+  } finally {
+    this.loading = false;
+  }
+},
+
+
     async ayantDroitValueChange() {
 
       if (this.deathStudyOfferData.distributionKey == "Quatre enfant à charge") {

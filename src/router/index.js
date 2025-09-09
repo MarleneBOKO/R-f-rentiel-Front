@@ -17,6 +17,9 @@ import fmp from "../views/fmp";
 import contrat from "../views/contrat";
 import litigation from "../views/litigation";
 import pool from "../views/pool";
+import demandecheque from "../views/DemandeCheque.vue";
+import listingdegat from "../views/ListingDegat.vue";
+
 import callCenter from "../views/callCenter"
 import statPsapComponet from '../components/statistical/psap.vue'
 import statChequeComponet from '../components/statistical/cheque.vue'
@@ -232,6 +235,21 @@ const routes = [
         name: "statReferentielComponet",
         component: statReferentielComponet,
       },
+
+
+
+      {
+  path: "/demandecheque",
+  name: "DemandeCheque",
+  component: demandecheque,
+},
+
+{
+  path: "/listingdegat",
+  name: "ListingDegat",
+  component: listingdegat,
+},
+
 
     ],
   },

@@ -1,0 +1,2509 @@
+TypeError: value.reduce is not a function
+    at VueComponent.handler (VDataIterator.js:87:32)
+    at invokeWithErrorHandling (vue.runtime.esm.js:3058:30)
+    at Watcher.run (vue.runtime.esm.js:3575:21)
+    at flushSchedulerQueue (vue.runtime.esm.js:4162:17)
+    at Array.eval (vue.runtime.esm.js:3184:20)
+    at flushCallbacks (vue.runtime.esm.js:3106:18)
+logError @ vue.runtime.esm.js:3090
+globalHandleError @ vue.runtime.esm.js:3082
+handleError @ vue.runtime.esm.js:3049
+invokeWithErrorHandling @ vue.runtime.esm.js:3065
+Watcher.run @ vue.runtime.esm.js:3575
+flushSchedulerQueue @ vue.runtime.esm.js:4162
+eval @ vue.runtime.esm.js:3184
+flushCallbacks @ vue.runtime.esm.js:3106
+Promise.then
+timerFunc @ vue.runtime.esm.js:3131
+nextTick @ vue.runtime.esm.js:3196
+queueWatcher @ vue.runtime.esm.js:4248
+Watcher.update @ vue.runtime.esm.js:3554
+Dep.notify @ vue.runtime.esm.js:780
+reactiveSetter @ vue.runtime.esm.js:1010
+proxySetter @ vue.runtime.esm.js:5395
+printComptableDoc @ index.js??clonedRuleSet-40.use[0]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/views/etude.vue?vue&type=script&lang=js&:4008
+await in printComptableDoc
+click @ loader.js??ruleSet[1].rules[0].use!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[0]!./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[4]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/views/etude.vue?vue&type=template&id=4aa0bf7d&scoped=true&:5732
+invokeWithErrorHandling @ vue.runtime.esm.js:3058
+invoker @ vue.runtime.esm.js:1859
+invokeWithErrorHandling @ vue.runtime.esm.js:3058
+Vue.$emit @ vue.runtime.esm.js:3757
+click @ VBtn.js:136
+invokeWithErrorHandling @ vue.runtime.esm.js:3058
+invoker @ vue.runtime.esm.js:1859
+original_1._wrapper @ vue.runtime.esm.js:7508Understand this error
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=== Fin downloadExcellData ===
+Génération du fichier Excel terminée. Lien: http://172.17.196.128:3087/api/v1/system/download?path=./public/uploads/user/statistical/STATISTIQUES-BENEFICIAIRE-20-06-2025_11:18.xlsx
+GET /api/v1/beneficiary?secondSignatureDateExist=true&checkRequestIsPrinted=false&secondSignatureDateStart=&secondSignatureDateEnd=&agentName= 200 1430.891 ms - 1665290
+Démarrage de la fonction printCheckRequestSlip
+Traitement des demandes de chèque pour les IDs: [
+  '68552424c889d32bcc967ab5',
+  '6852d516e3c3a2248c46553a',
+  '6852d3a0e3c3a2248c465536'
+]
+Traitement du bénéficiaire ID: 68552424c889d32bcc967ab5
+Numéro de chèque généré: 58
+Tentative d'insertion de la demande de chèque pour concaten: R-BJ2023200243000006/58
+schema insertion emit cheque {
+  Numero_Demande: 58,
+  Type_Demande_Cheque: 'Cheque',
+  Numero_Police: 'BJ20024302200169',
+  Numero_Client: '',
+  Numero_Sinistre: 'BJ2023200243000006',
+  Nom_Assure: 'SOCIETE CHINA GEZHOUBA GROUP COMPANY LIMITED',
+  Date_Demande_Cheque: '2025-06-20 11:18',
+  Montant_Reglement: 4619439,
+  Objet_Demande: 'Demande Check',
+  Nom_Beneficiaire: 'CHINA GEZHOUBA GROUP COMPANY LIMITED SUCCURSALE',
+  dateaccord: '2025-06-13',
+  redacteur: 'Célia ACAKPO',
+  concaten: 'R-BJ2023200243000006/58',
+  annuler: 0
+}
+error [AxiosError: Request failed with status code 500] {
+  code: 'ERR_BAD_RESPONSE',
+  config: {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false
+    },
+    adapter: [Function: httpAdapter],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 0,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: { FormData: [Function] },
+    validateStatus: [Function: validateStatus],
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'application-email': 'contact@tokpa-express.com',
+      'application-password': 'password',
+      'Content-Type': 'application/json',
+      'User-Agent': 'axios/0.27.2',
+      'Content-Length': 478
+    },
+    baseURL: 'http://172.17.196.128:8000/api',
+    method: 'post',
+    url: '/request',
+    data: '{"Numero_Demande":58,"Type_Demande_Cheque":"Cheque","Numero_Police":"BJ20024302200169","Numero_Client":"","Numero_Sinistre":"BJ2023200243000006","Nom_Assure":"SOCIETE CHINA GEZHOUBA GROUP COMPANY LIMITED","Date_Demande_Cheque":"2025-06-20 11:18","Montant_Reglement":4619439,"Objet_Demande":"Demande Check","Nom_Beneficiaire":"CHINA GEZHOUBA GROUP COMPANY LIMITED SUCCURSALE","dateaccord":"2025-06-13","redacteur":"Célia ACAKPO","concaten":"R-BJ2023200243000006/58","annuler":0}'
+  },
+  request: <ref *1> ClientRequest {
+    _events: [Object: null prototype] {
+      abort: [Function (anonymous)],
+      aborted: [Function (anonymous)],
+      connect: [Function (anonymous)],
+      error: [Function (anonymous)],
+      socket: [Function (anonymous)],
+      timeout: [Function (anonymous)],
+      finish: [Function: requestOnFinish]
+    },
+    _eventsCount: 7,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: false,
+    _last: false,
+    chunkedEncoding: false,
+    shouldKeepAlive: false,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: true,
+    sendDate: false,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    strictContentLength: false,
+    _contentLength: 478,
+    _hasBody: true,
+    _trailer: '',
+    finished: true,
+    _headerSent: true,
+    _closed: false,
+    _header: 'POST /api/request HTTP/1.1\r\n' +
+      'Accept: application/json, text/plain, */*\r\n' +
+      'application-email: contact@tokpa-express.com\r\n' +
+      'application-password: password\r\n' +
+      'Content-Type: application/json\r\n' +
+      'User-Agent: axios/0.27.2\r\n' +
+      'Content-Length: 478\r\n' +
+      'Host: 172.17.196.128:8000\r\n' +
+      'Connection: keep-alive\r\n' +
+      '\r\n',
+    _keepAliveTimeout: 0,
+    _onPendingData: [Function: nop],
+    agent: Agent {
+      _events: [Object: null prototype],
+      _eventsCount: 2,
+      _maxListeners: undefined,
+      defaultPort: 80,
+      protocol: 'http:',
+      options: [Object: null prototype],
+      requests: [Object: null prototype] {},
+      sockets: [Object: null prototype],
+      freeSockets: [Object: null prototype] {},
+      keepAliveMsecs: 1000,
+      keepAlive: true,
+      maxSockets: Infinity,
+      maxFreeSockets: 256,
+      scheduling: 'lifo',
+      maxTotalSockets: Infinity,
+      totalSocketCount: 1,
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false
+    },
+    socketPath: undefined,
+    method: 'POST',
+    maxHeaderSize: undefined,
+    insecureHTTPParser: undefined,
+    joinDuplicateHeaders: undefined,
+    path: '/api/request',
+    _ended: true,
+    res: IncomingMessage {
+      _events: [Object],
+      _readableState: [ReadableState],
+      _maxListeners: undefined,
+      socket: [Socket],
+      httpVersionMajor: 1,
+      httpVersionMinor: 1,
+      httpVersion: '1.1',
+      complete: true,
+      rawHeaders: [Array],
+      rawTrailers: [],
+      joinDuplicateHeaders: undefined,
+      aborted: false,
+      upgrade: false,
+      url: '',
+      method: null,
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+      client: [Socket],
+      _consuming: true,
+      _dumped: false,
+      req: [Circular *1],
+      _eventsCount: 4,
+      responseUrl: 'http://172.17.196.128:8000/api/request',
+      redirects: [],
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kHeaders)]: [Object],
+      [Symbol(kHeadersCount)]: 18,
+      [Symbol(kTrailers)]: null,
+      [Symbol(kTrailersCount)]: 0
+    },
+    aborted: false,
+    timeoutCb: [Function: emitRequestTimeout],
+    upgradeOrConnect: false,
+    parser: null,
+    maxHeadersCount: null,
+    reusedSocket: false,
+    host: '172.17.196.128',
+    protocol: 'http:',
+    _redirectable: Writable {
+      _events: [Object],
+      _writableState: [WritableState],
+      _maxListeners: undefined,
+      _options: [Object],
+      _ended: true,
+      _ending: true,
+      _redirectCount: 0,
+      _redirects: [],
+      _requestBodyLength: 478,
+      _requestBodyBuffers: [],
+      _eventsCount: 3,
+      _onNativeResponse: [Function (anonymous)],
+      _currentRequest: [Circular *1],
+      _currentUrl: 'http://172.17.196.128:8000/api/request',
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false
+    },
+    [Symbol(shapeMode)]: false,
+    [Symbol(kCapture)]: false,
+    [Symbol(kBytesWritten)]: 0,
+    [Symbol(kNeedDrain)]: false,
+    [Symbol(corked)]: 0,
+    [Symbol(kChunkedBuffer)]: [],
+    [Symbol(kChunkedLength)]: 0,
+    [Symbol(kSocket)]: Socket {
+      connecting: false,
+      _hadError: false,
+      _parent: null,
+      _host: null,
+      _closeAfterHandlingError: false,
+      _events: [Object],
+      _readableState: [ReadableState],
+      _writableState: [WritableState],
+      allowHalfOpen: false,
+      _maxListeners: undefined,
+      _eventsCount: 8,
+      _sockname: null,
+      _pendingData: null,
+      _pendingEncoding: '',
+      server: null,
+      _server: null,
+      timeout: 5000,
+      parser: null,
+      _httpMessage: [Circular *1],
+      write: [Function: writeAfterFIN],
+      [Symbol(async_id_symbol)]: 1082019,
+      [Symbol(kHandle)]: null,
+      [Symbol(lastWriteQueueSize)]: 0,
+      [Symbol(timeout)]: Timeout {
+        _idleTimeout: -1,
+        _idlePrev: null,
+        _idleNext: null,
+        _idleStart: 1584207,
+        _onTimeout: null,
+        _timerArgs: undefined,
+        _repeat: null,
+        _destroyed: true,
+        [Symbol(refed)]: false,
+        [Symbol(kHasPrimitive)]: false,
+        [Symbol(asyncId)]: 1082018,
+        [Symbol(triggerId)]: 0,
+        [Symbol(kAsyncContextFrame)]: undefined
+      },
+      [Symbol(kBuffer)]: null,
+      [Symbol(kBufferCb)]: null,
+      [Symbol(kBufferGen)]: null,
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kSetNoDelay)]: true,
+      [Symbol(kSetKeepAlive)]: true,
+      [Symbol(kSetKeepAliveInitialDelay)]: 60,
+      [Symbol(kBytesRead)]: 1562,
+      [Symbol(kBytesWritten)]: 759
+    },
+    [Symbol(kOutHeaders)]: [Object: null prototype] {
+      accept: [Array],
+      'application-email': [Array],
+      'application-password': [Array],
+      'content-type': [Array],
+      'user-agent': [Array],
+      'content-length': [Array],
+      host: [Array]
+    },
+    [Symbol(errored)]: null,
+    [Symbol(kHighWaterMark)]: 16384,
+    [Symbol(kRejectNonStandardBodyWrites)]: false,
+    [Symbol(kUniqueHeaders)]: null
+  },
+  response: {
+    status: 500,
+    statusText: 'Internal Server Error',
+    headers: {
+      host: '172.17.196.128:8000',
+      date: 'Fri, 20 Jun 2025 10:18:10 GMT, Fri, 20 Jun 2025 10:18:10 GMT',
+      connection: 'close',
+      'x-powered-by': 'PHP/8.2.0',
+      'cache-control': 'no-cache, private',
+      'content-type': 'application/json',
+      'access-control-allow-origin': '*',
+      'set-cookie': [Array]
+    },
+    config: {
+      transitional: [Object],
+      adapter: [Function: httpAdapter],
+      transformRequest: [Array],
+      transformResponse: [Array],
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      env: [Object],
+      validateStatus: [Function: validateStatus],
+      headers: [Object],
+      baseURL: 'http://172.17.196.128:8000/api',
+      method: 'post',
+      url: '/request',
+      data: '{"Numero_Demande":58,"Type_Demande_Cheque":"Cheque","Numero_Police":"BJ20024302200169","Numero_Client":"","Numero_Sinistre":"BJ2023200243000006","Nom_Assure":"SOCIETE CHINA GEZHOUBA GROUP COMPANY LIMITED","Date_Demande_Cheque":"2025-06-20 11:18","Montant_Reglement":4619439,"Objet_Demande":"Demande Check","Nom_Beneficiaire":"CHINA GEZHOUBA GROUP COMPANY LIMITED SUCCURSALE","dateaccord":"2025-06-13","redacteur":"Célia ACAKPO","concaten":"R-BJ2023200243000006/58","annuler":0}'
+    },
+    request: <ref *1> ClientRequest {
+      _events: [Object: null prototype],
+      _eventsCount: 7,
+      _maxListeners: undefined,
+      outputData: [],
+      outputSize: 0,
+      writable: true,
+      destroyed: false,
+      _last: false,
+      chunkedEncoding: false,
+      shouldKeepAlive: false,
+      maxRequestsOnConnectionReached: false,
+      _defaultKeepAlive: true,
+      useChunkedEncodingByDefault: true,
+      sendDate: false,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      strictContentLength: false,
+      _contentLength: 478,
+      _hasBody: true,
+      _trailer: '',
+      finished: true,
+      _headerSent: true,
+      _closed: false,
+      _header: 'POST /api/request HTTP/1.1\r\n' +
+        'Accept: application/json, text/plain, */*\r\n' +
+        'application-email: contact@tokpa-express.com\r\n' +
+        'application-password: password\r\n' +
+        'Content-Type: application/json\r\n' +
+        'User-Agent: axios/0.27.2\r\n' +
+        'Content-Length: 478\r\n' +
+        'Host: 172.17.196.128:8000\r\n' +
+        'Connection: keep-alive\r\n' +
+        '\r\n',
+      _keepAliveTimeout: 0,
+      _onPendingData: [Function: nop],
+      agent: [Agent],
+      socketPath: undefined,
+      method: 'POST',
+      maxHeaderSize: undefined,
+      insecureHTTPParser: undefined,
+      joinDuplicateHeaders: undefined,
+      path: '/api/request',
+      _ended: true,
+      res: [IncomingMessage],
+      aborted: false,
+      timeoutCb: [Function: emitRequestTimeout],
+      upgradeOrConnect: false,
+      parser: null,
+      maxHeadersCount: null,
+      reusedSocket: false,
+      host: '172.17.196.128',
+      protocol: 'http:',
+      _redirectable: [Writable],
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kChunkedBuffer)]: [],
+      [Symbol(kChunkedLength)]: 0,
+      [Symbol(kSocket)]: [Socket],
+      [Symbol(kOutHeaders)]: [Object: null prototype],
+      [Symbol(errored)]: null,
+      [Symbol(kHighWaterMark)]: 16384,
+      [Symbol(kRejectNonStandardBodyWrites)]: false,
+      [Symbol(kUniqueHeaders)]: null
+    },
+    data: {
+      error: "SQLSTATE[23000]: [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation de la contrainte PRIMARY KEY 'PK_demande_Cheque_Sinistre'. Impossible d'insérer une clé en double dans l'objet 'dbo.demande_Cheque_Sinistre'. (Connection: sqlsrv, SQL: insert into [demande_Cheque_Sinistre] ([Numero_Demande], [Type_Demande_Cheque], [Numero_Police], [Numero_Client], [Numero_Sinistre], [Nom_Assure], [Date_Demande_Cheque], [Montant_Reglement], [Recours_Encaisse], [Objet_Demande], [Nom_Beneficiaire], [dateaccord], [concaten], [redacteur], [annuler]) values (58, Cheque, BJ20024302200169, ?, BJ2023200243000006, SOCIETE CHINA GEZHOUBA GROUP COMPANY LIMITED, 2025-06-20, 4619439, ?, Demande Check, CHINA GEZHOUBA GROUP COMPANY LIMITED SUCCURSALE, 2025-06-13, R-BJ2023200243000006/58, Célia ACAKPO, 0))"
+    }
+  }
+}
+Erreur lors du traitement de l'ID du bénéficiaire 68552424c889d32bcc967ab5: [AxiosError: Request failed with status code 500] {
+  code: 'ERR_BAD_RESPONSE',
+  config: {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false
+    },
+    adapter: [Function: httpAdapter],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 0,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: { FormData: [Function] },
+    validateStatus: [Function: validateStatus],
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'application-email': 'contact@tokpa-express.com',
+      'application-password': 'password',
+      'Content-Type': 'application/json',
+      'User-Agent': 'axios/0.27.2',
+      'Content-Length': 478
+    },
+    baseURL: 'http://172.17.196.128:8000/api',
+    method: 'post',
+    url: '/request',
+    data: '{"Numero_Demande":58,"Type_Demande_Cheque":"Cheque","Numero_Police":"BJ20024302200169","Numero_Client":"","Numero_Sinistre":"BJ2023200243000006","Nom_Assure":"SOCIETE CHINA GEZHOUBA GROUP COMPANY LIMITED","Date_Demande_Cheque":"2025-06-20 11:18","Montant_Reglement":4619439,"Objet_Demande":"Demande Check","Nom_Beneficiaire":"CHINA GEZHOUBA GROUP COMPANY LIMITED SUCCURSALE","dateaccord":"2025-06-13","redacteur":"Célia ACAKPO","concaten":"R-BJ2023200243000006/58","annuler":0}'
+  },
+  request: <ref *1> ClientRequest {
+    _events: [Object: null prototype] {
+      abort: [Function (anonymous)],
+      aborted: [Function (anonymous)],
+      connect: [Function (anonymous)],
+      error: [Function (anonymous)],
+      socket: [Function (anonymous)],
+      timeout: [Function (anonymous)],
+      finish: [Function: requestOnFinish]
+    },
+    _eventsCount: 7,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: false,
+    _last: false,
+    chunkedEncoding: false,
+    shouldKeepAlive: false,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: true,
+    sendDate: false,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    strictContentLength: false,
+    _contentLength: 478,
+    _hasBody: true,
+    _trailer: '',
+    finished: true,
+    _headerSent: true,
+    _closed: false,
+    _header: 'POST /api/request HTTP/1.1\r\n' +
+      'Accept: application/json, text/plain, */*\r\n' +
+      'application-email: contact@tokpa-express.com\r\n' +
+      'application-password: password\r\n' +
+      'Content-Type: application/json\r\n' +
+      'User-Agent: axios/0.27.2\r\n' +
+      'Content-Length: 478\r\n' +
+      'Host: 172.17.196.128:8000\r\n' +
+      'Connection: keep-alive\r\n' +
+      '\r\n',
+    _keepAliveTimeout: 0,
+    _onPendingData: [Function: nop],
+    agent: Agent {
+      _events: [Object: null prototype],
+      _eventsCount: 2,
+      _maxListeners: undefined,
+      defaultPort: 80,
+      protocol: 'http:',
+      options: [Object: null prototype],
+      requests: [Object: null prototype] {},
+      sockets: [Object: null prototype],
+      freeSockets: [Object: null prototype] {},
+      keepAliveMsecs: 1000,
+      keepAlive: true,
+      maxSockets: Infinity,
+      maxFreeSockets: 256,
+      scheduling: 'lifo',
+      maxTotalSockets: Infinity,
+      totalSocketCount: 1,
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false
+    },
+    socketPath: undefined,
+    method: 'POST',
+    maxHeaderSize: undefined,
+    insecureHTTPParser: undefined,
+    joinDuplicateHeaders: undefined,
+    path: '/api/request',
+    _ended: true,
+    res: IncomingMessage {
+      _events: [Object],
+      _readableState: [ReadableState],
+      _maxListeners: undefined,
+      socket: [Socket],
+      httpVersionMajor: 1,
+      httpVersionMinor: 1,
+      httpVersion: '1.1',
+      complete: true,
+      rawHeaders: [Array],
+      rawTrailers: [],
+      joinDuplicateHeaders: undefined,
+      aborted: false,
+      upgrade: false,
+      url: '',
+      method: null,
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+      client: [Socket],
+      _consuming: true,
+      _dumped: false,
+      req: [Circular *1],
+      _eventsCount: 4,
+      responseUrl: 'http://172.17.196.128:8000/api/request',
+      redirects: [],
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kHeaders)]: [Object],
+      [Symbol(kHeadersCount)]: 18,
+      [Symbol(kTrailers)]: null,
+      [Symbol(kTrailersCount)]: 0
+    },
+    aborted: false,
+    timeoutCb: [Function: emitRequestTimeout],
+    upgradeOrConnect: false,
+    parser: null,
+    maxHeadersCount: null,
+    reusedSocket: false,
+    host: '172.17.196.128',
+    protocol: 'http:',
+    _redirectable: Writable {
+      _events: [Object],
+      _writableState: [WritableState],
+      _maxListeners: undefined,
+      _options: [Object],
+      _ended: true,
+      _ending: true,
+      _redirectCount: 0,
+      _redirects: [],
+      _requestBodyLength: 478,
+      _requestBodyBuffers: [],
+      _eventsCount: 3,
+      _onNativeResponse: [Function (anonymous)],
+      _currentRequest: [Circular *1],
+      _currentUrl: 'http://172.17.196.128:8000/api/request',
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false
+    },
+    [Symbol(shapeMode)]: false,
+    [Symbol(kCapture)]: false,
+    [Symbol(kBytesWritten)]: 0,
+    [Symbol(kNeedDrain)]: false,
+    [Symbol(corked)]: 0,
+    [Symbol(kChunkedBuffer)]: [],
+    [Symbol(kChunkedLength)]: 0,
+    [Symbol(kSocket)]: Socket {
+      connecting: false,
+      _hadError: false,
+      _parent: null,
+      _host: null,
+      _closeAfterHandlingError: false,
+      _events: [Object],
+      _readableState: [ReadableState],
+      _writableState: [WritableState],
+      allowHalfOpen: false,
+      _maxListeners: undefined,
+      _eventsCount: 8,
+      _sockname: null,
+      _pendingData: null,
+      _pendingEncoding: '',
+      server: null,
+      _server: null,
+      timeout: 5000,
+      parser: null,
+      _httpMessage: [Circular *1],
+      write: [Function: writeAfterFIN],
+      [Symbol(async_id_symbol)]: 1082019,
+      [Symbol(kHandle)]: null,
+      [Symbol(lastWriteQueueSize)]: 0,
+      [Symbol(timeout)]: Timeout {
+        _idleTimeout: -1,
+        _idlePrev: null,
+        _idleNext: null,
+        _idleStart: 1584207,
+        _onTimeout: null,
+        _timerArgs: undefined,
+        _repeat: null,
+        _destroyed: true,
+        [Symbol(refed)]: false,
+        [Symbol(kHasPrimitive)]: false,
+        [Symbol(asyncId)]: 1082018,
+        [Symbol(triggerId)]: 0,
+        [Symbol(kAsyncContextFrame)]: undefined
+      },
+      [Symbol(kBuffer)]: null,
+      [Symbol(kBufferCb)]: null,
+      [Symbol(kBufferGen)]: null,
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kSetNoDelay)]: true,
+      [Symbol(kSetKeepAlive)]: true,
+      [Symbol(kSetKeepAliveInitialDelay)]: 60,
+      [Symbol(kBytesRead)]: 1562,
+      [Symbol(kBytesWritten)]: 759
+    },
+    [Symbol(kOutHeaders)]: [Object: null prototype] {
+      accept: [Array],
+      'application-email': [Array],
+      'application-password': [Array],
+      'content-type': [Array],
+      'user-agent': [Array],
+      'content-length': [Array],
+      host: [Array]
+    },
+    [Symbol(errored)]: null,
+    [Symbol(kHighWaterMark)]: 16384,
+    [Symbol(kRejectNonStandardBodyWrites)]: false,
+    [Symbol(kUniqueHeaders)]: null
+  },
+  response: {
+    status: 500,
+    statusText: 'Internal Server Error',
+    headers: {
+      host: '172.17.196.128:8000',
+      date: 'Fri, 20 Jun 2025 10:18:10 GMT, Fri, 20 Jun 2025 10:18:10 GMT',
+      connection: 'close',
+      'x-powered-by': 'PHP/8.2.0',
+      'cache-control': 'no-cache, private',
+      'content-type': 'application/json',
+      'access-control-allow-origin': '*',
+      'set-cookie': [Array]
+    },
+    config: {
+      transitional: [Object],
+      adapter: [Function: httpAdapter],
+      transformRequest: [Array],
+      transformResponse: [Array],
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      env: [Object],
+      validateStatus: [Function: validateStatus],
+      headers: [Object],
+      baseURL: 'http://172.17.196.128:8000/api',
+      method: 'post',
+      url: '/request',
+      data: '{"Numero_Demande":58,"Type_Demande_Cheque":"Cheque","Numero_Police":"BJ20024302200169","Numero_Client":"","Numero_Sinistre":"BJ2023200243000006","Nom_Assure":"SOCIETE CHINA GEZHOUBA GROUP COMPANY LIMITED","Date_Demande_Cheque":"2025-06-20 11:18","Montant_Reglement":4619439,"Objet_Demande":"Demande Check","Nom_Beneficiaire":"CHINA GEZHOUBA GROUP COMPANY LIMITED SUCCURSALE","dateaccord":"2025-06-13","redacteur":"Célia ACAKPO","concaten":"R-BJ2023200243000006/58","annuler":0}'
+    },
+    request: <ref *1> ClientRequest {
+      _events: [Object: null prototype],
+      _eventsCount: 7,
+      _maxListeners: undefined,
+      outputData: [],
+      outputSize: 0,
+      writable: true,
+      destroyed: false,
+      _last: false,
+      chunkedEncoding: false,
+      shouldKeepAlive: false,
+      maxRequestsOnConnectionReached: false,
+      _defaultKeepAlive: true,
+      useChunkedEncodingByDefault: true,
+      sendDate: false,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      strictContentLength: false,
+      _contentLength: 478,
+      _hasBody: true,
+      _trailer: '',
+      finished: true,
+      _headerSent: true,
+      _closed: false,
+      _header: 'POST /api/request HTTP/1.1\r\n' +
+        'Accept: application/json, text/plain, */*\r\n' +
+        'application-email: contact@tokpa-express.com\r\n' +
+        'application-password: password\r\n' +
+        'Content-Type: application/json\r\n' +
+        'User-Agent: axios/0.27.2\r\n' +
+        'Content-Length: 478\r\n' +
+        'Host: 172.17.196.128:8000\r\n' +
+        'Connection: keep-alive\r\n' +
+        '\r\n',
+      _keepAliveTimeout: 0,
+      _onPendingData: [Function: nop],
+      agent: [Agent],
+      socketPath: undefined,
+      method: 'POST',
+      maxHeaderSize: undefined,
+      insecureHTTPParser: undefined,
+      joinDuplicateHeaders: undefined,
+      path: '/api/request',
+      _ended: true,
+      res: [IncomingMessage],
+      aborted: false,
+      timeoutCb: [Function: emitRequestTimeout],
+      upgradeOrConnect: false,
+      parser: null,
+      maxHeadersCount: null,
+      reusedSocket: false,
+      host: '172.17.196.128',
+      protocol: 'http:',
+      _redirectable: [Writable],
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kChunkedBuffer)]: [],
+      [Symbol(kChunkedLength)]: 0,
+      [Symbol(kSocket)]: [Socket],
+      [Symbol(kOutHeaders)]: [Object: null prototype],
+      [Symbol(errored)]: null,
+      [Symbol(kHighWaterMark)]: 16384,
+      [Symbol(kRejectNonStandardBodyWrites)]: false,
+      [Symbol(kUniqueHeaders)]: null
+    },
+    data: {
+      error: "SQLSTATE[23000]: [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation de la contrainte PRIMARY KEY 'PK_demande_Cheque_Sinistre'. Impossible d'insérer une clé en double dans l'objet 'dbo.demande_Cheque_Sinistre'. (Connection: sqlsrv, SQL: insert into [demande_Cheque_Sinistre] ([Numero_Demande], [Type_Demande_Cheque], [Numero_Police], [Numero_Client], [Numero_Sinistre], [Nom_Assure], [Date_Demande_Cheque], [Montant_Reglement], [Recours_Encaisse], [Objet_Demande], [Nom_Beneficiaire], [dateaccord], [concaten], [redacteur], [annuler]) values (58, Cheque, BJ20024302200169, ?, BJ2023200243000006, SOCIETE CHINA GEZHOUBA GROUP COMPANY LIMITED, 2025-06-20, 4619439, ?, Demande Check, CHINA GEZHOUBA GROUP COMPANY LIMITED SUCCURSALE, 2025-06-13, R-BJ2023200243000006/58, Célia ACAKPO, 0))"
+    }
+  }
+}
+Traitement du bénéficiaire ID: 6852d516e3c3a2248c46553a
+Numéro de chèque généré: 10
+Tentative d'insertion de la demande de chèque pour concaten: R-BJ2022200220101510/10
+schema insertion emit cheque {
+  Numero_Demande: 10,
+  Type_Demande_Cheque: 'Cheque',
+  Numero_Police: 'BJ20022012100114',
+  Numero_Client: 'BJ20022012100114',
+  Numero_Sinistre: 'BJ2022200220101510',
+  Nom_Assure: 'JACQUET DJAMAL',
+  Date_Demande_Cheque: '2025-06-20 11:18',
+  Montant_Reglement: 267294,
+  Objet_Demande: 'Demande Check',
+  Nom_Beneficiaire: 'KPALIKA TONAKPON ARNAUD',
+  dateaccord: '2025-05-27',
+  redacteur: 'Célia ACAKPO',
+  concaten: 'R-BJ2022200220101510/10',
+  annuler: 0
+}
+error [AxiosError: Request failed with status code 500] {
+  code: 'ERR_BAD_RESPONSE',
+  config: {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false
+    },
+    adapter: [Function: httpAdapter],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 0,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: { FormData: [Function] },
+    validateStatus: [Function: validateStatus],
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'application-email': 'contact@tokpa-express.com',
+      'application-password': 'password',
+      'Content-Type': 'application/json',
+      'User-Agent': 'axios/0.27.2',
+      'Content-Length': 439
+    },
+    baseURL: 'http://172.17.196.128:8000/api',
+    method: 'post',
+    url: '/request',
+    data: '{"Numero_Demande":10,"Type_Demande_Cheque":"Cheque","Numero_Police":"BJ20022012100114","Numero_Client":"BJ20022012100114","Numero_Sinistre":"BJ2022200220101510","Nom_Assure":"JACQUET DJAMAL","Date_Demande_Cheque":"2025-06-20 11:18","Montant_Reglement":267294,"Objet_Demande":"Demande Check","Nom_Beneficiaire":"KPALIKA TONAKPON ARNAUD","dateaccord":"2025-05-27","redacteur":"Célia ACAKPO","concaten":"R-BJ2022200220101510/10","annuler":0}'
+  },
+  request: <ref *1> ClientRequest {
+    _events: [Object: null prototype] {
+      abort: [Function (anonymous)],
+      aborted: [Function (anonymous)],
+      connect: [Function (anonymous)],
+      error: [Function (anonymous)],
+      socket: [Function (anonymous)],
+      timeout: [Function (anonymous)],
+      finish: [Function: requestOnFinish]
+    },
+    _eventsCount: 7,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: false,
+    _last: false,
+    chunkedEncoding: false,
+    shouldKeepAlive: false,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: true,
+    sendDate: false,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    strictContentLength: false,
+    _contentLength: 439,
+    _hasBody: true,
+    _trailer: '',
+    finished: true,
+    _headerSent: true,
+    _closed: false,
+    _header: 'POST /api/request HTTP/1.1\r\n' +
+      'Accept: application/json, text/plain, */*\r\n' +
+      'application-email: contact@tokpa-express.com\r\n' +
+      'application-password: password\r\n' +
+      'Content-Type: application/json\r\n' +
+      'User-Agent: axios/0.27.2\r\n' +
+      'Content-Length: 439\r\n' +
+      'Host: 172.17.196.128:8000\r\n' +
+      'Connection: keep-alive\r\n' +
+      '\r\n',
+    _keepAliveTimeout: 0,
+    _onPendingData: [Function: nop],
+    agent: Agent {
+      _events: [Object: null prototype],
+      _eventsCount: 2,
+      _maxListeners: undefined,
+      defaultPort: 80,
+      protocol: 'http:',
+      options: [Object: null prototype],
+      requests: [Object: null prototype] {},
+      sockets: [Object: null prototype],
+      freeSockets: [Object: null prototype] {},
+      keepAliveMsecs: 1000,
+      keepAlive: true,
+      maxSockets: Infinity,
+      maxFreeSockets: 256,
+      scheduling: 'lifo',
+      maxTotalSockets: Infinity,
+      totalSocketCount: 1,
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false
+    },
+    socketPath: undefined,
+    method: 'POST',
+    maxHeaderSize: undefined,
+    insecureHTTPParser: undefined,
+    joinDuplicateHeaders: undefined,
+    path: '/api/request',
+    _ended: true,
+    res: IncomingMessage {
+      _events: [Object],
+      _readableState: [ReadableState],
+      _maxListeners: undefined,
+      socket: [Socket],
+      httpVersionMajor: 1,
+      httpVersionMinor: 1,
+      httpVersion: '1.1',
+      complete: true,
+      rawHeaders: [Array],
+      rawTrailers: [],
+      joinDuplicateHeaders: undefined,
+      aborted: false,
+      upgrade: false,
+      url: '',
+      method: null,
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+      client: [Socket],
+      _consuming: true,
+      _dumped: false,
+      req: [Circular *1],
+      _eventsCount: 4,
+      responseUrl: 'http://172.17.196.128:8000/api/request',
+      redirects: [],
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kHeaders)]: [Object],
+      [Symbol(kHeadersCount)]: 18,
+      [Symbol(kTrailers)]: null,
+      [Symbol(kTrailersCount)]: 0
+    },
+    aborted: false,
+    timeoutCb: [Function: emitRequestTimeout],
+    upgradeOrConnect: false,
+    parser: null,
+    maxHeadersCount: null,
+    reusedSocket: false,
+    host: '172.17.196.128',
+    protocol: 'http:',
+    _redirectable: Writable {
+      _events: [Object],
+      _writableState: [WritableState],
+      _maxListeners: undefined,
+      _options: [Object],
+      _ended: true,
+      _ending: true,
+      _redirectCount: 0,
+      _redirects: [],
+      _requestBodyLength: 439,
+      _requestBodyBuffers: [],
+      _eventsCount: 3,
+      _onNativeResponse: [Function (anonymous)],
+      _currentRequest: [Circular *1],
+      _currentUrl: 'http://172.17.196.128:8000/api/request',
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false
+    },
+    [Symbol(shapeMode)]: false,
+    [Symbol(kCapture)]: false,
+    [Symbol(kBytesWritten)]: 0,
+    [Symbol(kNeedDrain)]: false,
+    [Symbol(corked)]: 0,
+    [Symbol(kChunkedBuffer)]: [],
+    [Symbol(kChunkedLength)]: 0,
+    [Symbol(kSocket)]: Socket {
+      connecting: false,
+      _hadError: false,
+      _parent: null,
+      _host: null,
+      _closeAfterHandlingError: false,
+      _events: [Object],
+      _readableState: [ReadableState],
+      _writableState: [WritableState],
+      allowHalfOpen: false,
+      _maxListeners: undefined,
+      _eventsCount: 8,
+      _sockname: null,
+      _pendingData: null,
+      _pendingEncoding: '',
+      server: null,
+      _server: null,
+      timeout: 5000,
+      parser: null,
+      _httpMessage: [Circular *1],
+      write: [Function: writeAfterFIN],
+      [Symbol(async_id_symbol)]: 1082095,
+      [Symbol(kHandle)]: null,
+      [Symbol(lastWriteQueueSize)]: 0,
+      [Symbol(timeout)]: Timeout {
+        _idleTimeout: -1,
+        _idlePrev: null,
+        _idleNext: null,
+        _idleStart: 1584609,
+        _onTimeout: null,
+        _timerArgs: undefined,
+        _repeat: null,
+        _destroyed: true,
+        [Symbol(refed)]: false,
+        [Symbol(kHasPrimitive)]: false,
+        [Symbol(asyncId)]: 1082094,
+        [Symbol(triggerId)]: 0,
+        [Symbol(kAsyncContextFrame)]: undefined
+      },
+      [Symbol(kBuffer)]: null,
+      [Symbol(kBufferCb)]: null,
+      [Symbol(kBufferGen)]: null,
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kSetNoDelay)]: true,
+      [Symbol(kSetKeepAlive)]: true,
+      [Symbol(kSetKeepAliveInitialDelay)]: 60,
+      [Symbol(kBytesRead)]: 1522,
+      [Symbol(kBytesWritten)]: 720
+    },
+    [Symbol(kOutHeaders)]: [Object: null prototype] {
+      accept: [Array],
+      'application-email': [Array],
+      'application-password': [Array],
+      'content-type': [Array],
+      'user-agent': [Array],
+      'content-length': [Array],
+      host: [Array]
+    },
+    [Symbol(errored)]: null,
+    [Symbol(kHighWaterMark)]: 16384,
+    [Symbol(kRejectNonStandardBodyWrites)]: false,
+    [Symbol(kUniqueHeaders)]: null
+  },
+  response: {
+    status: 500,
+    statusText: 'Internal Server Error',
+    headers: {
+      host: '172.17.196.128:8000',
+      date: 'Fri, 20 Jun 2025 10:18:11 GMT, Fri, 20 Jun 2025 10:18:11 GMT',
+      connection: 'close',
+      'x-powered-by': 'PHP/8.2.0',
+      'cache-control': 'no-cache, private',
+      'content-type': 'application/json',
+      'access-control-allow-origin': '*',
+      'set-cookie': [Array]
+    },
+    config: {
+      transitional: [Object],
+      adapter: [Function: httpAdapter],
+      transformRequest: [Array],
+      transformResponse: [Array],
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      env: [Object],
+      validateStatus: [Function: validateStatus],
+      headers: [Object],
+      baseURL: 'http://172.17.196.128:8000/api',
+      method: 'post',
+      url: '/request',
+      data: '{"Numero_Demande":10,"Type_Demande_Cheque":"Cheque","Numero_Police":"BJ20022012100114","Numero_Client":"BJ20022012100114","Numero_Sinistre":"BJ2022200220101510","Nom_Assure":"JACQUET DJAMAL","Date_Demande_Cheque":"2025-06-20 11:18","Montant_Reglement":267294,"Objet_Demande":"Demande Check","Nom_Beneficiaire":"KPALIKA TONAKPON ARNAUD","dateaccord":"2025-05-27","redacteur":"Célia ACAKPO","concaten":"R-BJ2022200220101510/10","annuler":0}'
+    },
+    request: <ref *1> ClientRequest {
+      _events: [Object: null prototype],
+      _eventsCount: 7,
+      _maxListeners: undefined,
+      outputData: [],
+      outputSize: 0,
+      writable: true,
+      destroyed: false,
+      _last: false,
+      chunkedEncoding: false,
+      shouldKeepAlive: false,
+      maxRequestsOnConnectionReached: false,
+      _defaultKeepAlive: true,
+      useChunkedEncodingByDefault: true,
+      sendDate: false,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      strictContentLength: false,
+      _contentLength: 439,
+      _hasBody: true,
+      _trailer: '',
+      finished: true,
+      _headerSent: true,
+      _closed: false,
+      _header: 'POST /api/request HTTP/1.1\r\n' +
+        'Accept: application/json, text/plain, */*\r\n' +
+        'application-email: contact@tokpa-express.com\r\n' +
+        'application-password: password\r\n' +
+        'Content-Type: application/json\r\n' +
+        'User-Agent: axios/0.27.2\r\n' +
+        'Content-Length: 439\r\n' +
+        'Host: 172.17.196.128:8000\r\n' +
+        'Connection: keep-alive\r\n' +
+        '\r\n',
+      _keepAliveTimeout: 0,
+      _onPendingData: [Function: nop],
+      agent: [Agent],
+      socketPath: undefined,
+      method: 'POST',
+      maxHeaderSize: undefined,
+      insecureHTTPParser: undefined,
+      joinDuplicateHeaders: undefined,
+      path: '/api/request',
+      _ended: true,
+      res: [IncomingMessage],
+      aborted: false,
+      timeoutCb: [Function: emitRequestTimeout],
+      upgradeOrConnect: false,
+      parser: null,
+      maxHeadersCount: null,
+      reusedSocket: false,
+      host: '172.17.196.128',
+      protocol: 'http:',
+      _redirectable: [Writable],
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kChunkedBuffer)]: [],
+      [Symbol(kChunkedLength)]: 0,
+      [Symbol(kSocket)]: [Socket],
+      [Symbol(kOutHeaders)]: [Object: null prototype],
+      [Symbol(errored)]: null,
+      [Symbol(kHighWaterMark)]: 16384,
+      [Symbol(kRejectNonStandardBodyWrites)]: false,
+      [Symbol(kUniqueHeaders)]: null
+    },
+    data: {
+      error: "SQLSTATE[23000]: [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation de la contrainte PRIMARY KEY 'PK_demande_Cheque_Sinistre'. Impossible d'insérer une clé en double dans l'objet 'dbo.demande_Cheque_Sinistre'. (Connection: sqlsrv, SQL: insert into [demande_Cheque_Sinistre] ([Numero_Demande], [Type_Demande_Cheque], [Numero_Police], [Numero_Client], [Numero_Sinistre], [Nom_Assure], [Date_Demande_Cheque], [Montant_Reglement], [Recours_Encaisse], [Objet_Demande], [Nom_Beneficiaire], [dateaccord], [concaten], [redacteur], [annuler]) values (10, Cheque, BJ20022012100114, BJ20022012100114, BJ2022200220101510, JACQUET DJAMAL, 2025-06-20, 267294, ?, Demande Check, KPALIKA TONAKPON ARNAUD, 2025-05-27, R-BJ2022200220101510/10, Célia ACAKPO, 0))"
+    }
+  }
+}
+Erreur lors du traitement de l'ID du bénéficiaire 6852d516e3c3a2248c46553a: [AxiosError: Request failed with status code 500] {
+  code: 'ERR_BAD_RESPONSE',
+  config: {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false
+    },
+    adapter: [Function: httpAdapter],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 0,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: { FormData: [Function] },
+    validateStatus: [Function: validateStatus],
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'application-email': 'contact@tokpa-express.com',
+      'application-password': 'password',
+      'Content-Type': 'application/json',
+      'User-Agent': 'axios/0.27.2',
+      'Content-Length': 439
+    },
+    baseURL: 'http://172.17.196.128:8000/api',
+    method: 'post',
+    url: '/request',
+    data: '{"Numero_Demande":10,"Type_Demande_Cheque":"Cheque","Numero_Police":"BJ20022012100114","Numero_Client":"BJ20022012100114","Numero_Sinistre":"BJ2022200220101510","Nom_Assure":"JACQUET DJAMAL","Date_Demande_Cheque":"2025-06-20 11:18","Montant_Reglement":267294,"Objet_Demande":"Demande Check","Nom_Beneficiaire":"KPALIKA TONAKPON ARNAUD","dateaccord":"2025-05-27","redacteur":"Célia ACAKPO","concaten":"R-BJ2022200220101510/10","annuler":0}'
+  },
+  request: <ref *1> ClientRequest {
+    _events: [Object: null prototype] {
+      abort: [Function (anonymous)],
+      aborted: [Function (anonymous)],
+      connect: [Function (anonymous)],
+      error: [Function (anonymous)],
+      socket: [Function (anonymous)],
+      timeout: [Function (anonymous)],
+      finish: [Function: requestOnFinish]
+    },
+    _eventsCount: 7,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: false,
+    _last: false,
+    chunkedEncoding: false,
+    shouldKeepAlive: false,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: true,
+    sendDate: false,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    strictContentLength: false,
+    _contentLength: 439,
+    _hasBody: true,
+    _trailer: '',
+    finished: true,
+    _headerSent: true,
+    _closed: false,
+    _header: 'POST /api/request HTTP/1.1\r\n' +
+      'Accept: application/json, text/plain, */*\r\n' +
+      'application-email: contact@tokpa-express.com\r\n' +
+      'application-password: password\r\n' +
+      'Content-Type: application/json\r\n' +
+      'User-Agent: axios/0.27.2\r\n' +
+      'Content-Length: 439\r\n' +
+      'Host: 172.17.196.128:8000\r\n' +
+      'Connection: keep-alive\r\n' +
+      '\r\n',
+    _keepAliveTimeout: 0,
+    _onPendingData: [Function: nop],
+    agent: Agent {
+      _events: [Object: null prototype],
+      _eventsCount: 2,
+      _maxListeners: undefined,
+      defaultPort: 80,
+      protocol: 'http:',
+      options: [Object: null prototype],
+      requests: [Object: null prototype] {},
+      sockets: [Object: null prototype],
+      freeSockets: [Object: null prototype] {},
+      keepAliveMsecs: 1000,
+      keepAlive: true,
+      maxSockets: Infinity,
+      maxFreeSockets: 256,
+      scheduling: 'lifo',
+      maxTotalSockets: Infinity,
+      totalSocketCount: 1,
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false
+    },
+    socketPath: undefined,
+    method: 'POST',
+    maxHeaderSize: undefined,
+    insecureHTTPParser: undefined,
+    joinDuplicateHeaders: undefined,
+    path: '/api/request',
+    _ended: true,
+    res: IncomingMessage {
+      _events: [Object],
+      _readableState: [ReadableState],
+      _maxListeners: undefined,
+      socket: [Socket],
+      httpVersionMajor: 1,
+      httpVersionMinor: 1,
+      httpVersion: '1.1',
+      complete: true,
+      rawHeaders: [Array],
+      rawTrailers: [],
+      joinDuplicateHeaders: undefined,
+      aborted: false,
+      upgrade: false,
+      url: '',
+      method: null,
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+      client: [Socket],
+      _consuming: true,
+      _dumped: false,
+      req: [Circular *1],
+      _eventsCount: 4,
+      responseUrl: 'http://172.17.196.128:8000/api/request',
+      redirects: [],
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kHeaders)]: [Object],
+      [Symbol(kHeadersCount)]: 18,
+      [Symbol(kTrailers)]: null,
+      [Symbol(kTrailersCount)]: 0
+    },
+    aborted: false,
+    timeoutCb: [Function: emitRequestTimeout],
+    upgradeOrConnect: false,
+    parser: null,
+    maxHeadersCount: null,
+    reusedSocket: false,
+    host: '172.17.196.128',
+    protocol: 'http:',
+    _redirectable: Writable {
+      _events: [Object],
+      _writableState: [WritableState],
+      _maxListeners: undefined,
+      _options: [Object],
+      _ended: true,
+      _ending: true,
+      _redirectCount: 0,
+      _redirects: [],
+      _requestBodyLength: 439,
+      _requestBodyBuffers: [],
+      _eventsCount: 3,
+      _onNativeResponse: [Function (anonymous)],
+      _currentRequest: [Circular *1],
+      _currentUrl: 'http://172.17.196.128:8000/api/request',
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false
+    },
+    [Symbol(shapeMode)]: false,
+    [Symbol(kCapture)]: false,
+    [Symbol(kBytesWritten)]: 0,
+    [Symbol(kNeedDrain)]: false,
+    [Symbol(corked)]: 0,
+    [Symbol(kChunkedBuffer)]: [],
+    [Symbol(kChunkedLength)]: 0,
+    [Symbol(kSocket)]: Socket {
+      connecting: false,
+      _hadError: false,
+      _parent: null,
+      _host: null,
+      _closeAfterHandlingError: false,
+      _events: [Object],
+      _readableState: [ReadableState],
+      _writableState: [WritableState],
+      allowHalfOpen: false,
+      _maxListeners: undefined,
+      _eventsCount: 8,
+      _sockname: null,
+      _pendingData: null,
+      _pendingEncoding: '',
+      server: null,
+      _server: null,
+      timeout: 5000,
+      parser: null,
+      _httpMessage: [Circular *1],
+      write: [Function: writeAfterFIN],
+      [Symbol(async_id_symbol)]: 1082095,
+      [Symbol(kHandle)]: null,
+      [Symbol(lastWriteQueueSize)]: 0,
+      [Symbol(timeout)]: Timeout {
+        _idleTimeout: -1,
+        _idlePrev: null,
+        _idleNext: null,
+        _idleStart: 1584609,
+        _onTimeout: null,
+        _timerArgs: undefined,
+        _repeat: null,
+        _destroyed: true,
+        [Symbol(refed)]: false,
+        [Symbol(kHasPrimitive)]: false,
+        [Symbol(asyncId)]: 1082094,
+        [Symbol(triggerId)]: 0,
+        [Symbol(kAsyncContextFrame)]: undefined
+      },
+      [Symbol(kBuffer)]: null,
+      [Symbol(kBufferCb)]: null,
+      [Symbol(kBufferGen)]: null,
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kSetNoDelay)]: true,
+      [Symbol(kSetKeepAlive)]: true,
+      [Symbol(kSetKeepAliveInitialDelay)]: 60,
+      [Symbol(kBytesRead)]: 1522,
+      [Symbol(kBytesWritten)]: 720
+    },
+    [Symbol(kOutHeaders)]: [Object: null prototype] {
+      accept: [Array],
+      'application-email': [Array],
+      'application-password': [Array],
+      'content-type': [Array],
+      'user-agent': [Array],
+      'content-length': [Array],
+      host: [Array]
+    },
+    [Symbol(errored)]: null,
+    [Symbol(kHighWaterMark)]: 16384,
+    [Symbol(kRejectNonStandardBodyWrites)]: false,
+    [Symbol(kUniqueHeaders)]: null
+  },
+  response: {
+    status: 500,
+    statusText: 'Internal Server Error',
+    headers: {
+      host: '172.17.196.128:8000',
+      date: 'Fri, 20 Jun 2025 10:18:11 GMT, Fri, 20 Jun 2025 10:18:11 GMT',
+      connection: 'close',
+      'x-powered-by': 'PHP/8.2.0',
+      'cache-control': 'no-cache, private',
+      'content-type': 'application/json',
+      'access-control-allow-origin': '*',
+      'set-cookie': [Array]
+    },
+    config: {
+      transitional: [Object],
+      adapter: [Function: httpAdapter],
+      transformRequest: [Array],
+      transformResponse: [Array],
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      env: [Object],
+      validateStatus: [Function: validateStatus],
+      headers: [Object],
+      baseURL: 'http://172.17.196.128:8000/api',
+      method: 'post',
+      url: '/request',
+      data: '{"Numero_Demande":10,"Type_Demande_Cheque":"Cheque","Numero_Police":"BJ20022012100114","Numero_Client":"BJ20022012100114","Numero_Sinistre":"BJ2022200220101510","Nom_Assure":"JACQUET DJAMAL","Date_Demande_Cheque":"2025-06-20 11:18","Montant_Reglement":267294,"Objet_Demande":"Demande Check","Nom_Beneficiaire":"KPALIKA TONAKPON ARNAUD","dateaccord":"2025-05-27","redacteur":"Célia ACAKPO","concaten":"R-BJ2022200220101510/10","annuler":0}'
+    },
+    request: <ref *1> ClientRequest {
+      _events: [Object: null prototype],
+      _eventsCount: 7,
+      _maxListeners: undefined,
+      outputData: [],
+      outputSize: 0,
+      writable: true,
+      destroyed: false,
+      _last: false,
+      chunkedEncoding: false,
+      shouldKeepAlive: false,
+      maxRequestsOnConnectionReached: false,
+      _defaultKeepAlive: true,
+      useChunkedEncodingByDefault: true,
+      sendDate: false,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      strictContentLength: false,
+      _contentLength: 439,
+      _hasBody: true,
+      _trailer: '',
+      finished: true,
+      _headerSent: true,
+      _closed: false,
+      _header: 'POST /api/request HTTP/1.1\r\n' +
+        'Accept: application/json, text/plain, */*\r\n' +
+        'application-email: contact@tokpa-express.com\r\n' +
+        'application-password: password\r\n' +
+        'Content-Type: application/json\r\n' +
+        'User-Agent: axios/0.27.2\r\n' +
+        'Content-Length: 439\r\n' +
+        'Host: 172.17.196.128:8000\r\n' +
+        'Connection: keep-alive\r\n' +
+        '\r\n',
+      _keepAliveTimeout: 0,
+      _onPendingData: [Function: nop],
+      agent: [Agent],
+      socketPath: undefined,
+      method: 'POST',
+      maxHeaderSize: undefined,
+      insecureHTTPParser: undefined,
+      joinDuplicateHeaders: undefined,
+      path: '/api/request',
+      _ended: true,
+      res: [IncomingMessage],
+      aborted: false,
+      timeoutCb: [Function: emitRequestTimeout],
+      upgradeOrConnect: false,
+      parser: null,
+      maxHeadersCount: null,
+      reusedSocket: false,
+      host: '172.17.196.128',
+      protocol: 'http:',
+      _redirectable: [Writable],
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kChunkedBuffer)]: [],
+      [Symbol(kChunkedLength)]: 0,
+      [Symbol(kSocket)]: [Socket],
+      [Symbol(kOutHeaders)]: [Object: null prototype],
+      [Symbol(errored)]: null,
+      [Symbol(kHighWaterMark)]: 16384,
+      [Symbol(kRejectNonStandardBodyWrites)]: false,
+      [Symbol(kUniqueHeaders)]: null
+    },
+    data: {
+      error: "SQLSTATE[23000]: [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation de la contrainte PRIMARY KEY 'PK_demande_Cheque_Sinistre'. Impossible d'insérer une clé en double dans l'objet 'dbo.demande_Cheque_Sinistre'. (Connection: sqlsrv, SQL: insert into [demande_Cheque_Sinistre] ([Numero_Demande], [Type_Demande_Cheque], [Numero_Police], [Numero_Client], [Numero_Sinistre], [Nom_Assure], [Date_Demande_Cheque], [Montant_Reglement], [Recours_Encaisse], [Objet_Demande], [Nom_Beneficiaire], [dateaccord], [concaten], [redacteur], [annuler]) values (10, Cheque, BJ20022012100114, BJ20022012100114, BJ2022200220101510, JACQUET DJAMAL, 2025-06-20, 267294, ?, Demande Check, KPALIKA TONAKPON ARNAUD, 2025-05-27, R-BJ2022200220101510/10, Célia ACAKPO, 0))"
+    }
+  }
+}
+Traitement du bénéficiaire ID: 6852d3a0e3c3a2248c465536
+Numéro de chèque généré: 3
+Tentative d'insertion de la demande de chèque pour concaten: R-BJ2024112820500937/3
+schema insertion emit cheque {
+  Numero_Demande: 3,
+  Type_Demande_Cheque: 'Cheque',
+  Numero_Police: 'BJ11282052300010',
+  Numero_Client: '',
+  Numero_Sinistre: 'BJ2024112820500937',
+  Nom_Assure: 'BONI CHABI A BRICE',
+  Date_Demande_Cheque: '2025-06-20 11:18',
+  Montant_Reglement: 100000,
+  Objet_Demande: 'Demande Check',
+  Nom_Beneficiaire: 'NOUDEHOUENOU CLEMENCE ESTELLE',
+  dateaccord: '2025-05-22',
+  redacteur: 'Célia ACAKPO',
+  concaten: 'R-BJ2024112820500937/3',
+  annuler: 0
+}
+error [AxiosError: Request failed with status code 500] {
+  code: 'ERR_BAD_RESPONSE',
+  config: {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false
+    },
+    adapter: [Function: httpAdapter],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 0,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: { FormData: [Function] },
+    validateStatus: [Function: validateStatus],
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'application-email': 'contact@tokpa-express.com',
+      'application-password': 'password',
+      'Content-Type': 'application/json',
+      'User-Agent': 'axios/0.27.2',
+      'Content-Length': 431
+    },
+    baseURL: 'http://172.17.196.128:8000/api',
+    method: 'post',
+    url: '/request',
+    data: '{"Numero_Demande":3,"Type_Demande_Cheque":"Cheque","Numero_Police":"BJ11282052300010","Numero_Client":"","Numero_Sinistre":"BJ2024112820500937","Nom_Assure":"BONI CHABI A BRICE","Date_Demande_Cheque":"2025-06-20 11:18","Montant_Reglement":100000,"Objet_Demande":"Demande Check","Nom_Beneficiaire":"NOUDEHOUENOU CLEMENCE ESTELLE","dateaccord":"2025-05-22","redacteur":"Célia ACAKPO","concaten":"R-BJ2024112820500937/3","annuler":0}'
+  },
+  request: <ref *1> ClientRequest {
+    _events: [Object: null prototype] {
+      abort: [Function (anonymous)],
+      aborted: [Function (anonymous)],
+      connect: [Function (anonymous)],
+      error: [Function (anonymous)],
+      socket: [Function (anonymous)],
+      timeout: [Function (anonymous)],
+      finish: [Function: requestOnFinish]
+    },
+    _eventsCount: 7,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: false,
+    _last: false,
+    chunkedEncoding: false,
+    shouldKeepAlive: false,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: true,
+    sendDate: false,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    strictContentLength: false,
+    _contentLength: 431,
+    _hasBody: true,
+    _trailer: '',
+    finished: true,
+    _headerSent: true,
+    _closed: false,
+    _header: 'POST /api/request HTTP/1.1\r\n' +
+      'Accept: application/json, text/plain, */*\r\n' +
+      'application-email: contact@tokpa-express.com\r\n' +
+      'application-password: password\r\n' +
+      'Content-Type: application/json\r\n' +
+      'User-Agent: axios/0.27.2\r\n' +
+      'Content-Length: 431\r\n' +
+      'Host: 172.17.196.128:8000\r\n' +
+      'Connection: keep-alive\r\n' +
+      '\r\n',
+    _keepAliveTimeout: 0,
+    _onPendingData: [Function: nop],
+    agent: Agent {
+      _events: [Object: null prototype],
+      _eventsCount: 2,
+      _maxListeners: undefined,
+      defaultPort: 80,
+      protocol: 'http:',
+      options: [Object: null prototype],
+      requests: [Object: null prototype] {},
+      sockets: [Object: null prototype],
+      freeSockets: [Object: null prototype] {},
+      keepAliveMsecs: 1000,
+      keepAlive: true,
+      maxSockets: Infinity,
+      maxFreeSockets: 256,
+      scheduling: 'lifo',
+      maxTotalSockets: Infinity,
+      totalSocketCount: 1,
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false
+    },
+    socketPath: undefined,
+    method: 'POST',
+    maxHeaderSize: undefined,
+    insecureHTTPParser: undefined,
+    joinDuplicateHeaders: undefined,
+    path: '/api/request',
+    _ended: true,
+    res: IncomingMessage {
+      _events: [Object],
+      _readableState: [ReadableState],
+      _maxListeners: undefined,
+      socket: [Socket],
+      httpVersionMajor: 1,
+      httpVersionMinor: 1,
+      httpVersion: '1.1',
+      complete: true,
+      rawHeaders: [Array],
+      rawTrailers: [],
+      joinDuplicateHeaders: undefined,
+      aborted: false,
+      upgrade: false,
+      url: '',
+      method: null,
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+      client: [Socket],
+      _consuming: true,
+      _dumped: false,
+      req: [Circular *1],
+      _eventsCount: 4,
+      responseUrl: 'http://172.17.196.128:8000/api/request',
+      redirects: [],
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kHeaders)]: [Object],
+      [Symbol(kHeadersCount)]: 18,
+      [Symbol(kTrailers)]: null,
+      [Symbol(kTrailersCount)]: 0
+    },
+    aborted: false,
+    timeoutCb: [Function: emitRequestTimeout],
+    upgradeOrConnect: false,
+    parser: null,
+    maxHeadersCount: null,
+    reusedSocket: false,
+    host: '172.17.196.128',
+    protocol: 'http:',
+    _redirectable: Writable {
+      _events: [Object],
+      _writableState: [WritableState],
+      _maxListeners: undefined,
+      _options: [Object],
+      _ended: true,
+      _ending: true,
+      _redirectCount: 0,
+      _redirects: [],
+      _requestBodyLength: 431,
+      _requestBodyBuffers: [],
+      _eventsCount: 3,
+      _onNativeResponse: [Function (anonymous)],
+      _currentRequest: [Circular *1],
+      _currentUrl: 'http://172.17.196.128:8000/api/request',
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false
+    },
+    [Symbol(shapeMode)]: false,
+    [Symbol(kCapture)]: false,
+    [Symbol(kBytesWritten)]: 0,
+    [Symbol(kNeedDrain)]: false,
+    [Symbol(corked)]: 0,
+    [Symbol(kChunkedBuffer)]: [],
+    [Symbol(kChunkedLength)]: 0,
+    [Symbol(kSocket)]: Socket {
+      connecting: false,
+      _hadError: false,
+      _parent: null,
+      _host: null,
+      _closeAfterHandlingError: false,
+      _events: [Object],
+      _readableState: [ReadableState],
+      _writableState: [WritableState],
+      allowHalfOpen: false,
+      _maxListeners: undefined,
+      _eventsCount: 8,
+      _sockname: null,
+      _pendingData: null,
+      _pendingEncoding: '',
+      server: null,
+      _server: null,
+      timeout: 5000,
+      parser: null,
+      _httpMessage: [Circular *1],
+      write: [Function: writeAfterFIN],
+      [Symbol(async_id_symbol)]: 1082170,
+      [Symbol(kHandle)]: null,
+      [Symbol(lastWriteQueueSize)]: 0,
+      [Symbol(timeout)]: Timeout {
+        _idleTimeout: -1,
+        _idlePrev: null,
+        _idleNext: null,
+        _idleStart: 1584951,
+        _onTimeout: null,
+        _timerArgs: undefined,
+        _repeat: null,
+        _destroyed: true,
+        [Symbol(refed)]: false,
+        [Symbol(kHasPrimitive)]: false,
+        [Symbol(asyncId)]: 1082169,
+        [Symbol(triggerId)]: 0,
+        [Symbol(kAsyncContextFrame)]: undefined
+      },
+      [Symbol(kBuffer)]: null,
+      [Symbol(kBufferCb)]: null,
+      [Symbol(kBufferGen)]: null,
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kSetNoDelay)]: true,
+      [Symbol(kSetKeepAlive)]: true,
+      [Symbol(kSetKeepAliveInitialDelay)]: 60,
+      [Symbol(kBytesRead)]: 1515,
+      [Symbol(kBytesWritten)]: 712
+    },
+    [Symbol(kOutHeaders)]: [Object: null prototype] {
+      accept: [Array],
+      'application-email': [Array],
+      'application-password': [Array],
+      'content-type': [Array],
+      'user-agent': [Array],
+      'content-length': [Array],
+      host: [Array]
+    },
+    [Symbol(errored)]: null,
+    [Symbol(kHighWaterMark)]: 16384,
+    [Symbol(kRejectNonStandardBodyWrites)]: false,
+    [Symbol(kUniqueHeaders)]: null
+  },
+  response: {
+    status: 500,
+    statusText: 'Internal Server Error',
+    headers: {
+      host: '172.17.196.128:8000',
+      date: 'Fri, 20 Jun 2025 10:18:11 GMT, Fri, 20 Jun 2025 10:18:11 GMT',
+      connection: 'close',
+      'x-powered-by': 'PHP/8.2.0',
+      'cache-control': 'no-cache, private',
+      'content-type': 'application/json',
+      'access-control-allow-origin': '*',
+      'set-cookie': [Array]
+    },
+    config: {
+      transitional: [Object],
+      adapter: [Function: httpAdapter],
+      transformRequest: [Array],
+      transformResponse: [Array],
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      env: [Object],
+      validateStatus: [Function: validateStatus],
+      headers: [Object],
+      baseURL: 'http://172.17.196.128:8000/api',
+      method: 'post',
+      url: '/request',
+      data: '{"Numero_Demande":3,"Type_Demande_Cheque":"Cheque","Numero_Police":"BJ11282052300010","Numero_Client":"","Numero_Sinistre":"BJ2024112820500937","Nom_Assure":"BONI CHABI A BRICE","Date_Demande_Cheque":"2025-06-20 11:18","Montant_Reglement":100000,"Objet_Demande":"Demande Check","Nom_Beneficiaire":"NOUDEHOUENOU CLEMENCE ESTELLE","dateaccord":"2025-05-22","redacteur":"Célia ACAKPO","concaten":"R-BJ2024112820500937/3","annuler":0}'
+    },
+    request: <ref *1> ClientRequest {
+      _events: [Object: null prototype],
+      _eventsCount: 7,
+      _maxListeners: undefined,
+      outputData: [],
+      outputSize: 0,
+      writable: true,
+      destroyed: false,
+      _last: false,
+      chunkedEncoding: false,
+      shouldKeepAlive: false,
+      maxRequestsOnConnectionReached: false,
+      _defaultKeepAlive: true,
+      useChunkedEncodingByDefault: true,
+      sendDate: false,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      strictContentLength: false,
+      _contentLength: 431,
+      _hasBody: true,
+      _trailer: '',
+      finished: true,
+      _headerSent: true,
+      _closed: false,
+      _header: 'POST /api/request HTTP/1.1\r\n' +
+        'Accept: application/json, text/plain, */*\r\n' +
+        'application-email: contact@tokpa-express.com\r\n' +
+        'application-password: password\r\n' +
+        'Content-Type: application/json\r\n' +
+        'User-Agent: axios/0.27.2\r\n' +
+        'Content-Length: 431\r\n' +
+        'Host: 172.17.196.128:8000\r\n' +
+        'Connection: keep-alive\r\n' +
+        '\r\n',
+      _keepAliveTimeout: 0,
+      _onPendingData: [Function: nop],
+      agent: [Agent],
+      socketPath: undefined,
+      method: 'POST',
+      maxHeaderSize: undefined,
+      insecureHTTPParser: undefined,
+      joinDuplicateHeaders: undefined,
+      path: '/api/request',
+      _ended: true,
+      res: [IncomingMessage],
+      aborted: false,
+      timeoutCb: [Function: emitRequestTimeout],
+      upgradeOrConnect: false,
+      parser: null,
+      maxHeadersCount: null,
+      reusedSocket: false,
+      host: '172.17.196.128',
+      protocol: 'http:',
+      _redirectable: [Writable],
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kChunkedBuffer)]: [],
+      [Symbol(kChunkedLength)]: 0,
+      [Symbol(kSocket)]: [Socket],
+      [Symbol(kOutHeaders)]: [Object: null prototype],
+      [Symbol(errored)]: null,
+      [Symbol(kHighWaterMark)]: 16384,
+      [Symbol(kRejectNonStandardBodyWrites)]: false,
+      [Symbol(kUniqueHeaders)]: null
+    },
+    data: {
+      error: "SQLSTATE[23000]: [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation de la contrainte PRIMARY KEY 'PK_demande_Cheque_Sinistre'. Impossible d'insérer une clé en double dans l'objet 'dbo.demande_Cheque_Sinistre'. (Connection: sqlsrv, SQL: insert into [demande_Cheque_Sinistre] ([Numero_Demande], [Type_Demande_Cheque], [Numero_Police], [Numero_Client], [Numero_Sinistre], [Nom_Assure], [Date_Demande_Cheque], [Montant_Reglement], [Recours_Encaisse], [Objet_Demande], [Nom_Beneficiaire], [dateaccord], [concaten], [redacteur], [annuler]) values (3, Cheque, BJ11282052300010, ?, BJ2024112820500937, BONI CHABI A BRICE, 2025-06-20, 100000, ?, Demande Check, NOUDEHOUENOU CLEMENCE ESTELLE, 2025-05-22, R-BJ2024112820500937/3, Célia ACAKPO, 0))"
+    }
+  }
+}
+Erreur lors du traitement de l'ID du bénéficiaire 6852d3a0e3c3a2248c465536: [AxiosError: Request failed with status code 500] {
+  code: 'ERR_BAD_RESPONSE',
+  config: {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false
+    },
+    adapter: [Function: httpAdapter],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 0,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: { FormData: [Function] },
+    validateStatus: [Function: validateStatus],
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'application-email': 'contact@tokpa-express.com',
+      'application-password': 'password',
+      'Content-Type': 'application/json',
+      'User-Agent': 'axios/0.27.2',
+      'Content-Length': 431
+    },
+    baseURL: 'http://172.17.196.128:8000/api',
+    method: 'post',
+    url: '/request',
+    data: '{"Numero_Demande":3,"Type_Demande_Cheque":"Cheque","Numero_Police":"BJ11282052300010","Numero_Client":"","Numero_Sinistre":"BJ2024112820500937","Nom_Assure":"BONI CHABI A BRICE","Date_Demande_Cheque":"2025-06-20 11:18","Montant_Reglement":100000,"Objet_Demande":"Demande Check","Nom_Beneficiaire":"NOUDEHOUENOU CLEMENCE ESTELLE","dateaccord":"2025-05-22","redacteur":"Célia ACAKPO","concaten":"R-BJ2024112820500937/3","annuler":0}'
+  },
+  request: <ref *1> ClientRequest {
+    _events: [Object: null prototype] {
+      abort: [Function (anonymous)],
+      aborted: [Function (anonymous)],
+      connect: [Function (anonymous)],
+      error: [Function (anonymous)],
+      socket: [Function (anonymous)],
+      timeout: [Function (anonymous)],
+      finish: [Function: requestOnFinish]
+    },
+    _eventsCount: 7,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: false,
+    _last: false,
+    chunkedEncoding: false,
+    shouldKeepAlive: false,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: true,
+    sendDate: false,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    strictContentLength: false,
+    _contentLength: 431,
+    _hasBody: true,
+    _trailer: '',
+    finished: true,
+    _headerSent: true,
+    _closed: false,
+    _header: 'POST /api/request HTTP/1.1\r\n' +
+      'Accept: application/json, text/plain, */*\r\n' +
+      'application-email: contact@tokpa-express.com\r\n' +
+      'application-password: password\r\n' +
+      'Content-Type: application/json\r\n' +
+      'User-Agent: axios/0.27.2\r\n' +
+      'Content-Length: 431\r\n' +
+      'Host: 172.17.196.128:8000\r\n' +
+      'Connection: keep-alive\r\n' +
+      '\r\n',
+    _keepAliveTimeout: 0,
+    _onPendingData: [Function: nop],
+    agent: Agent {
+      _events: [Object: null prototype],
+      _eventsCount: 2,
+      _maxListeners: undefined,
+      defaultPort: 80,
+      protocol: 'http:',
+      options: [Object: null prototype],
+      requests: [Object: null prototype] {},
+      sockets: [Object: null prototype],
+      freeSockets: [Object: null prototype] {},
+      keepAliveMsecs: 1000,
+      keepAlive: true,
+      maxSockets: Infinity,
+      maxFreeSockets: 256,
+      scheduling: 'lifo',
+      maxTotalSockets: Infinity,
+      totalSocketCount: 1,
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false
+    },
+    socketPath: undefined,
+    method: 'POST',
+    maxHeaderSize: undefined,
+    insecureHTTPParser: undefined,
+    joinDuplicateHeaders: undefined,
+    path: '/api/request',
+    _ended: true,
+    res: IncomingMessage {
+      _events: [Object],
+      _readableState: [ReadableState],
+      _maxListeners: undefined,
+      socket: [Socket],
+      httpVersionMajor: 1,
+      httpVersionMinor: 1,
+      httpVersion: '1.1',
+      complete: true,
+      rawHeaders: [Array],
+      rawTrailers: [],
+      joinDuplicateHeaders: undefined,
+      aborted: false,
+      upgrade: false,
+      url: '',
+      method: null,
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+      client: [Socket],
+      _consuming: true,
+      _dumped: false,
+      req: [Circular *1],
+      _eventsCount: 4,
+      responseUrl: 'http://172.17.196.128:8000/api/request',
+      redirects: [],
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kHeaders)]: [Object],
+      [Symbol(kHeadersCount)]: 18,
+      [Symbol(kTrailers)]: null,
+      [Symbol(kTrailersCount)]: 0
+    },
+    aborted: false,
+    timeoutCb: [Function: emitRequestTimeout],
+    upgradeOrConnect: false,
+    parser: null,
+    maxHeadersCount: null,
+    reusedSocket: false,
+    host: '172.17.196.128',
+    protocol: 'http:',
+    _redirectable: Writable {
+      _events: [Object],
+      _writableState: [WritableState],
+      _maxListeners: undefined,
+      _options: [Object],
+      _ended: true,
+      _ending: true,
+      _redirectCount: 0,
+      _redirects: [],
+      _requestBodyLength: 431,
+      _requestBodyBuffers: [],
+      _eventsCount: 3,
+      _onNativeResponse: [Function (anonymous)],
+      _currentRequest: [Circular *1],
+      _currentUrl: 'http://172.17.196.128:8000/api/request',
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false
+    },
+    [Symbol(shapeMode)]: false,
+    [Symbol(kCapture)]: false,
+    [Symbol(kBytesWritten)]: 0,
+    [Symbol(kNeedDrain)]: false,
+    [Symbol(corked)]: 0,
+    [Symbol(kChunkedBuffer)]: [],
+    [Symbol(kChunkedLength)]: 0,
+    [Symbol(kSocket)]: Socket {
+      connecting: false,
+      _hadError: false,
+      _parent: null,
+      _host: null,
+      _closeAfterHandlingError: false,
+      _events: [Object],
+      _readableState: [ReadableState],
+      _writableState: [WritableState],
+      allowHalfOpen: false,
+      _maxListeners: undefined,
+      _eventsCount: 8,
+      _sockname: null,
+      _pendingData: null,
+      _pendingEncoding: '',
+      server: null,
+      _server: null,
+      timeout: 5000,
+      parser: null,
+      _httpMessage: [Circular *1],
+      write: [Function: writeAfterFIN],
+      [Symbol(async_id_symbol)]: 1082170,
+      [Symbol(kHandle)]: null,
+      [Symbol(lastWriteQueueSize)]: 0,
+      [Symbol(timeout)]: Timeout {
+        _idleTimeout: -1,
+        _idlePrev: null,
+        _idleNext: null,
+        _idleStart: 1584951,
+        _onTimeout: null,
+        _timerArgs: undefined,
+        _repeat: null,
+        _destroyed: true,
+        [Symbol(refed)]: false,
+        [Symbol(kHasPrimitive)]: false,
+        [Symbol(asyncId)]: 1082169,
+        [Symbol(triggerId)]: 0,
+        [Symbol(kAsyncContextFrame)]: undefined
+      },
+      [Symbol(kBuffer)]: null,
+      [Symbol(kBufferCb)]: null,
+      [Symbol(kBufferGen)]: null,
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kSetNoDelay)]: true,
+      [Symbol(kSetKeepAlive)]: true,
+      [Symbol(kSetKeepAliveInitialDelay)]: 60,
+      [Symbol(kBytesRead)]: 1515,
+      [Symbol(kBytesWritten)]: 712
+    },
+    [Symbol(kOutHeaders)]: [Object: null prototype] {
+      accept: [Array],
+      'application-email': [Array],
+      'application-password': [Array],
+      'content-type': [Array],
+      'user-agent': [Array],
+      'content-length': [Array],
+      host: [Array]
+    },
+    [Symbol(errored)]: null,
+    [Symbol(kHighWaterMark)]: 16384,
+    [Symbol(kRejectNonStandardBodyWrites)]: false,
+    [Symbol(kUniqueHeaders)]: null
+  },
+  response: {
+    status: 500,
+    statusText: 'Internal Server Error',
+    headers: {
+      host: '172.17.196.128:8000',
+      date: 'Fri, 20 Jun 2025 10:18:11 GMT, Fri, 20 Jun 2025 10:18:11 GMT',
+      connection: 'close',
+      'x-powered-by': 'PHP/8.2.0',
+      'cache-control': 'no-cache, private',
+      'content-type': 'application/json',
+      'access-control-allow-origin': '*',
+      'set-cookie': [Array]
+    },
+    config: {
+      transitional: [Object],
+      adapter: [Function: httpAdapter],
+      transformRequest: [Array],
+      transformResponse: [Array],
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      env: [Object],
+      validateStatus: [Function: validateStatus],
+      headers: [Object],
+      baseURL: 'http://172.17.196.128:8000/api',
+      method: 'post',
+      url: '/request',
+      data: '{"Numero_Demande":3,"Type_Demande_Cheque":"Cheque","Numero_Police":"BJ11282052300010","Numero_Client":"","Numero_Sinistre":"BJ2024112820500937","Nom_Assure":"BONI CHABI A BRICE","Date_Demande_Cheque":"2025-06-20 11:18","Montant_Reglement":100000,"Objet_Demande":"Demande Check","Nom_Beneficiaire":"NOUDEHOUENOU CLEMENCE ESTELLE","dateaccord":"2025-05-22","redacteur":"Célia ACAKPO","concaten":"R-BJ2024112820500937/3","annuler":0}'
+    },
+    request: <ref *1> ClientRequest {
+      _events: [Object: null prototype],
+      _eventsCount: 7,
+      _maxListeners: undefined,
+      outputData: [],
+      outputSize: 0,
+      writable: true,
+      destroyed: false,
+      _last: false,
+      chunkedEncoding: false,
+      shouldKeepAlive: false,
+      maxRequestsOnConnectionReached: false,
+      _defaultKeepAlive: true,
+      useChunkedEncodingByDefault: true,
+      sendDate: false,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      strictContentLength: false,
+      _contentLength: 431,
+      _hasBody: true,
+      _trailer: '',
+      finished: true,
+      _headerSent: true,
+      _closed: false,
+      _header: 'POST /api/request HTTP/1.1\r\n' +
+        'Accept: application/json, text/plain, */*\r\n' +
+        'application-email: contact@tokpa-express.com\r\n' +
+        'application-password: password\r\n' +
+        'Content-Type: application/json\r\n' +
+        'User-Agent: axios/0.27.2\r\n' +
+        'Content-Length: 431\r\n' +
+        'Host: 172.17.196.128:8000\r\n' +
+        'Connection: keep-alive\r\n' +
+        '\r\n',
+      _keepAliveTimeout: 0,
+      _onPendingData: [Function: nop],
+      agent: [Agent],
+      socketPath: undefined,
+      method: 'POST',
+      maxHeaderSize: undefined,
+      insecureHTTPParser: undefined,
+      joinDuplicateHeaders: undefined,
+      path: '/api/request',
+      _ended: true,
+      res: [IncomingMessage],
+      aborted: false,
+      timeoutCb: [Function: emitRequestTimeout],
+      upgradeOrConnect: false,
+      parser: null,
+      maxHeadersCount: null,
+      reusedSocket: false,
+      host: '172.17.196.128',
+      protocol: 'http:',
+      _redirectable: [Writable],
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kChunkedBuffer)]: [],
+      [Symbol(kChunkedLength)]: 0,
+      [Symbol(kSocket)]: [Socket],
+      [Symbol(kOutHeaders)]: [Object: null prototype],
+      [Symbol(errored)]: null,
+      [Symbol(kHighWaterMark)]: 16384,
+      [Symbol(kRejectNonStandardBodyWrites)]: false,
+      [Symbol(kUniqueHeaders)]: null
+    },
+    data: {
+      error: "SQLSTATE[23000]: [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation de la contrainte PRIMARY KEY 'PK_demande_Cheque_Sinistre'. Impossible d'insérer une clé en double dans l'objet 'dbo.demande_Cheque_Sinistre'. (Connection: sqlsrv, SQL: insert into [demande_Cheque_Sinistre] ([Numero_Demande], [Type_Demande_Cheque], [Numero_Police], [Numero_Client], [Numero_Sinistre], [Nom_Assure], [Date_Demande_Cheque], [Montant_Reglement], [Recours_Encaisse], [Objet_Demande], [Nom_Beneficiaire], [dateaccord], [concaten], [redacteur], [annuler]) values (3, Cheque, BJ11282052300010, ?, BJ2024112820500937, BONI CHABI A BRICE, 2025-06-20, 100000, ?, Demande Check, NOUDEHOUENOU CLEMENCE ESTELLE, 2025-05-22, R-BJ2024112820500937/3, Célia ACAKPO, 0))"
+    }
+  }
+}
+Aucun enregistrement de demande de chèque traité avec succès
+GET /api/v1/check/print-check-request-slip?ids=[%2268552424c889d32bcc967ab5%22,%226852d516e3c3a2248c46553a%22,%226852d3a0e3c3a2248c465536%22] 400 1323.548 ms - 341
+
+
+
+
+
+
+
+
+
+
+
+Saved!
+=== Fin downloadExcellData ===
+Génération du fichier Excel terminée. Lien: http://172.17.196.128:3087/api/v1/system/download?path=./public/uploads/user/statistical/STATISTIQUES-BENEFICIAIRE-20-06-2025_12:38.xlsx
+GET /api/v1/beneficiary?secondSignatureDateExist=true&checkRequestIsPrinted=false&secondSignatureDateStart=&secondSignatureDateEnd=&agentName= 200 2502.160 ms - 1665290
+Démarrage de la fonction printCheckRequestSlip
+Traitement des demandes de chèque pour les IDs: [
+  '68552424c889d32bcc967ab5',
+  '6852d516e3c3a2248c46553a',
+  '6852d3a0e3c3a2248c465536'
+]
+Traitement du bénéficiaire ID: 68552424c889d32bcc967ab5
+availableNumbers triés : [
+   1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12,
+  13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+  25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+  37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48,
+  49, 50, 51, 52, 53, 54, 55, 57, 58
+]
+availableNumbers length : 57
+Dernier élément d'availableNumbers : 58
+Trouvé numéro manquant: 56
+Numéro de chèque généré: 56
+Tentative d'insertion de la demande de chèque pour concaten: R-BJ2023200243000006/56
+schema insertion emit cheque {
+  Numero_Demande: 56,
+  Type_Demande_Cheque: 'Cheque',
+  Numero_Police: 'BJ20024302200169',
+  Numero_Client: '',
+  Numero_Sinistre: 'BJ2023200243000006',
+  Nom_Assure: 'SOCIETE CHINA GEZHOUBA GROUP COMPANY LIMITED',
+  Date_Demande_Cheque: '2025-06-20 12:38',
+  Montant_Reglement: 4619439,
+  Objet_Demande: 'Demande Check',
+  Nom_Beneficiaire: 'CHINA GEZHOUBA GROUP COMPANY LIMITED SUCCURSALE',
+  dateaccord: '2025-06-13',
+  redacteur: 'Célia ACAKPO',
+  concaten: 'R-BJ2023200243000006/56',
+  annuler: 0
+}
+reponse axios emit cheque {
+  data: {
+    Numero_Demande: 56,
+    Type_Demande_Cheque: 'Cheque',
+    Numero_Police: 'BJ20024302200169',
+    Numero_Client: null,
+    Numero_Sinistre: 'BJ2023200243000006',
+    Nom_Assure: 'SOCIETE CHINA GEZHOUBA GROUP COMPANY LIMITED',
+    Date_Demande_Cheque: '2025-06-20',
+    Montant_Reglement: '4619439.00',
+    Recours_Encaisse: null,
+    Objet_Demande: 'Demande Check',
+    Nom_Beneficiaire: 'CHINA GEZHOUBA GROUP COMPANY LIMITED SUCCURSALE',
+    dateaccord: '2025-06-13',
+    concaten: 'R-BJ2023200243000006/56',
+    redacteur: 'Célia ACAKPO',
+    annuler: 0
+  },
+  success: true
+}
+insert emit cheque request
+Demande de chèque insérée avec succès pour concaten: R-BJ2023200243000006/56
+Bénéficiaire mis à jour pour concaten: R-BJ2023200243000006/56
+Traitement du bénéficiaire ID: 6852d516e3c3a2248c46553a
+availableNumbers triés : [
+  1, 2,  3,  4, 5,
+  8, 9, 10, 12
+]
+availableNumbers length : 9
+Dernier élément d'availableNumbers : 12
+Trouvé numéro manquant: 6
+Numéro de chèque généré: 6
+Tentative d'insertion de la demande de chèque pour concaten: R-BJ2022200220101510/6
+schema insertion emit cheque {
+  Numero_Demande: 6,
+  Type_Demande_Cheque: 'Cheque',
+  Numero_Police: 'BJ20022012100114',
+  Numero_Client: 'BJ20022012100114',
+  Numero_Sinistre: 'BJ2022200220101510',
+  Nom_Assure: 'JACQUET DJAMAL',
+  Date_Demande_Cheque: '2025-06-20 12:38',
+  Montant_Reglement: 267294,
+  Objet_Demande: 'Demande Check',
+  Nom_Beneficiaire: 'KPALIKA TONAKPON ARNAUD',
+  dateaccord: '2025-05-27',
+  redacteur: 'Célia ACAKPO',
+  concaten: 'R-BJ2022200220101510/6',
+  annuler: 0
+}
+reponse axios emit cheque {
+  data: {
+    Numero_Demande: 6,
+    Type_Demande_Cheque: 'Cheque',
+    Numero_Police: 'BJ20022012100114',
+    Numero_Client: 'BJ20022012100114',
+    Numero_Sinistre: 'BJ2022200220101510',
+    Nom_Assure: 'JACQUET DJAMAL',
+    Date_Demande_Cheque: '2025-06-20',
+    Montant_Reglement: '267294.00',
+    Recours_Encaisse: null,
+    Objet_Demande: 'Demande Check',
+    Nom_Beneficiaire: 'KPALIKA TONAKPON ARNAUD',
+    dateaccord: '2025-05-27',
+    concaten: 'R-BJ2022200220101510/6',
+    redacteur: 'Célia ACAKPO',
+    annuler: 0
+  },
+  success: true
+}
+insert emit cheque request
+Demande de chèque insérée avec succès pour concaten: R-BJ2022200220101510/6
+Bénéficiaire mis à jour pour concaten: R-BJ2022200220101510/6
+Traitement du bénéficiaire ID: 6852d3a0e3c3a2248c465536
+availableNumbers triés : [ 1, 3 ]
+availableNumbers length : 2
+Dernier élément d'availableNumbers : 3
+Trouvé numéro manquant: 2
+Numéro de chèque généré: 2
+Tentative d'insertion de la demande de chèque pour concaten: R-BJ2024112820500937/2
+schema insertion emit cheque {
+  Numero_Demande: 2,
+  Type_Demande_Cheque: 'Cheque',
+  Numero_Police: 'BJ11282052300010',
+  Numero_Client: '',
+  Numero_Sinistre: 'BJ2024112820500937',
+  Nom_Assure: 'BONI CHABI A BRICE',
+  Date_Demande_Cheque: '2025-06-20 12:38',
+  Montant_Reglement: 100000,
+  Objet_Demande: 'Demande Check',
+  Nom_Beneficiaire: 'NOUDEHOUENOU CLEMENCE ESTELLE',
+  dateaccord: '2025-05-22',
+  redacteur: 'Célia ACAKPO',
+  concaten: 'R-BJ2024112820500937/2',
+  annuler: 0
+}
+reponse axios emit cheque {
+  data: {
+    Numero_Demande: 2,
+    Type_Demande_Cheque: 'Cheque',
+    Numero_Police: 'BJ11282052300010',
+    Numero_Client: null,
+    Numero_Sinistre: 'BJ2024112820500937',
+    Nom_Assure: 'BONI CHABI A BRICE',
+    Date_Demande_Cheque: '2025-06-20',
+    Montant_Reglement: '100000.00',
+    Recours_Encaisse: null,
+    Objet_Demande: 'Demande Check',
+    Nom_Beneficiaire: 'NOUDEHOUENOU CLEMENCE ESTELLE',
+    dateaccord: '2025-05-22',
+    concaten: 'R-BJ2024112820500937/2',
+    redacteur: 'Célia ACAKPO',
+    annuler: 0
+  },
+  success: true
+}
+insert emit cheque request
+Demande de chèque insérée avec succès pour concaten: R-BJ2024112820500937/2
+Bénéficiaire mis à jour pour concaten: R-BJ2024112820500937/2
+Le PDF sera généré à: C:\REFERENTIEL DATA\backend\backend\public\check\BORDEREAU-DEMANDE-CHEQUE2025-06-20T11-38-53.779Z-.pdf
+Génération du document PDF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Génération du fichier Excel terminée. Lien: http://172.17.196.128:3087/api/v1/system/download?path=./public/uploads/user/statistical/STATISTIQUES-BENEFICIAIRE-20-06-2025_12:38.xlsx
+GET /api/v1/beneficiary?secondSignatureDateExist=true&checkRequestIsPrinted=false&secondSignatureDateStart=&secondSignatureDateEnd=&agentName= 200 2502.160 ms - 1665290
+Démarrage de la fonction printCheckRequestSlip
+Traitement des demandes de chèque pour les IDs: [
+  '68552424c889d32bcc967ab5',
+  '6852d516e3c3a2248c46553a',
+  '6852d3a0e3c3a2248c465536'
+]
+Traitement du bénéficiaire ID: 68552424c889d32bcc967ab5
+availableNumbers triés : [
+   1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12,
+  13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+  25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+  37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48,
+  49, 50, 51, 52, 53, 54, 55, 57, 58
+]
+availableNumbers length : 57
+Dernier élément d'availableNumbers : 58
+Trouvé numéro manquant: 56
+Numéro de chèque généré: 56
+Tentative d'insertion de la demande de chèque pour concaten: R-BJ2023200243000006/56
+schema insertion emit cheque {
+  Numero_Demande: 56,
+  Type_Demande_Cheque: 'Cheque',
+  Numero_Police: 'BJ20024302200169',
+  Numero_Client: '',
+  Numero_Sinistre: 'BJ2023200243000006',
+  Nom_Assure: 'SOCIETE CHINA GEZHOUBA GROUP COMPANY LIMITED',
+  Date_Demande_Cheque: '2025-06-20 12:38',
+  Montant_Reglement: 4619439,
+  Objet_Demande: 'Demande Check',
+  Nom_Beneficiaire: 'CHINA GEZHOUBA GROUP COMPANY LIMITED SUCCURSALE',
+  dateaccord: '2025-06-13',
+  redacteur: 'Célia ACAKPO',
+  concaten: 'R-BJ2023200243000006/56',
+  annuler: 0
+}
+reponse axios emit cheque {
+  data: {
+    Numero_Demande: 56,
+    Type_Demande_Cheque: 'Cheque',
+    Numero_Police: 'BJ20024302200169',
+    Numero_Client: null,
+    Numero_Sinistre: 'BJ2023200243000006',
+    Nom_Assure: 'SOCIETE CHINA GEZHOUBA GROUP COMPANY LIMITED',
+    Date_Demande_Cheque: '2025-06-20',
+    Montant_Reglement: '4619439.00',
+    Recours_Encaisse: null,
+    Objet_Demande: 'Demande Check',
+    Nom_Beneficiaire: 'CHINA GEZHOUBA GROUP COMPANY LIMITED SUCCURSALE',
+    dateaccord: '2025-06-13',
+    concaten: 'R-BJ2023200243000006/56',
+    redacteur: 'Célia ACAKPO',
+    annuler: 0
+  },
+  success: true
+}
+insert emit cheque request
+Demande de chèque insérée avec succès pour concaten: R-BJ2023200243000006/56
+Bénéficiaire mis à jour pour concaten: R-BJ2023200243000006/56
+Traitement du bénéficiaire ID: 6852d516e3c3a2248c46553a
+availableNumbers triés : [
+  1, 2,  3,  4, 5,
+  8, 9, 10, 12
+]
+availableNumbers length : 9
+Dernier élément d'availableNumbers : 12
+Trouvé numéro manquant: 6
+Numéro de chèque généré: 6
+Tentative d'insertion de la demande de chèque pour concaten: R-BJ2022200220101510/6
+schema insertion emit cheque {
+  Numero_Demande: 6,
+  Type_Demande_Cheque: 'Cheque',
+  Numero_Police: 'BJ20022012100114',
+  Numero_Client: 'BJ20022012100114',
+  Numero_Sinistre: 'BJ2022200220101510',
+  Nom_Assure: 'JACQUET DJAMAL',
+  Date_Demande_Cheque: '2025-06-20 12:38',
+  Montant_Reglement: 267294,
+  Objet_Demande: 'Demande Check',
+  Nom_Beneficiaire: 'KPALIKA TONAKPON ARNAUD',
+  dateaccord: '2025-05-27',
+  redacteur: 'Célia ACAKPO',
+  concaten: 'R-BJ2022200220101510/6',
+  annuler: 0
+}
+reponse axios emit cheque {
+  data: {
+    Numero_Demande: 6,
+    Type_Demande_Cheque: 'Cheque',
+    Numero_Police: 'BJ20022012100114',
+    Numero_Client: 'BJ20022012100114',
+    Numero_Sinistre: 'BJ2022200220101510',
+    Nom_Assure: 'JACQUET DJAMAL',
+    Date_Demande_Cheque: '2025-06-20',
+    Montant_Reglement: '267294.00',
+    Recours_Encaisse: null,
+    Objet_Demande: 'Demande Check',
+    Nom_Beneficiaire: 'KPALIKA TONAKPON ARNAUD',
+    dateaccord: '2025-05-27',
+    concaten: 'R-BJ2022200220101510/6',
+    redacteur: 'Célia ACAKPO',
+    annuler: 0
+  },
+  success: true
+}
+insert emit cheque request
+Demande de chèque insérée avec succès pour concaten: R-BJ2022200220101510/6
+Bénéficiaire mis à jour pour concaten: R-BJ2022200220101510/6
+Traitement du bénéficiaire ID: 6852d3a0e3c3a2248c465536
+availableNumbers triés : [ 1, 3 ]
+availableNumbers length : 2
+Dernier élément d'availableNumbers : 3
+Trouvé numéro manquant: 2
+Numéro de chèque généré: 2
+Tentative d'insertion de la demande de chèque pour concaten: R-BJ2024112820500937/2
+schema insertion emit cheque {
+  Numero_Demande: 2,
+  Type_Demande_Cheque: 'Cheque',
+  Numero_Police: 'BJ11282052300010',
+  Numero_Client: '',
+  Numero_Sinistre: 'BJ2024112820500937',
+  Nom_Assure: 'BONI CHABI A BRICE',
+  Date_Demande_Cheque: '2025-06-20 12:38',
+  Montant_Reglement: 100000,
+  Objet_Demande: 'Demande Check',
+  Nom_Beneficiaire: 'NOUDEHOUENOU CLEMENCE ESTELLE',
+  dateaccord: '2025-05-22',
+  redacteur: 'Célia ACAKPO',
+  concaten: 'R-BJ2024112820500937/2',
+  annuler: 0
+}
+reponse axios emit cheque {
+  data: {
+    Numero_Demande: 2,
+    Type_Demande_Cheque: 'Cheque',
+    Numero_Police: 'BJ11282052300010',
+    Numero_Client: null,
+    Numero_Sinistre: 'BJ2024112820500937',
+    Nom_Assure: 'BONI CHABI A BRICE',
+    Date_Demande_Cheque: '2025-06-20',
+    Montant_Reglement: '100000.00',
+    Recours_Encaisse: null,
+    Objet_Demande: 'Demande Check',
+    Nom_Beneficiaire: 'NOUDEHOUENOU CLEMENCE ESTELLE',
+    dateaccord: '2025-05-22',
+    concaten: 'R-BJ2024112820500937/2',
+    redacteur: 'Célia ACAKPO',
+    annuler: 0
+  },
+  success: true
+}
+insert emit cheque request
+Demande de chèque insérée avec succès pour concaten: R-BJ2024112820500937/2
+Bénéficiaire mis à jour pour concaten: R-BJ2024112820500937/2
+Le PDF sera généré à: C:\REFERENTIEL DATA\backend\backend\public\check\BORDEREAU-DEMANDE-CHEQUE2025-06-20T11-38-53.779Z-.pdf
+Génération du document PDF
+
