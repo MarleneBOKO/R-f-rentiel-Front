@@ -19,6 +19,7 @@ import litigation from "../views/litigation";
 import pool from "../views/pool";
 import demandecheque from "../views/DemandeCheque.vue";
 import listingdegat from "../views/ListingDegat.vue";
+import UsersList from '../views/UsersList.vue'
 
 import callCenter from "../views/callCenter"
 import statPsapComponet from '../components/statistical/psap.vue'
@@ -34,7 +35,6 @@ import statContentieuxComponet from '../components/statistical/contentieux.vue'
 import statCallCenterComponet from '../components/statistical/callCenter.vue'
 import statEtudeComponet from '../components/statistical/etude.vue'
 import statReferentielComponet from '../components/statistical/referentiel.vue'
-
 // import login from '../login'
 //import App from '../App.vue'
 
@@ -243,9 +243,15 @@ const routes = [
   name: "DemandeCheque",
   component: demandecheque,
 },
+{
+    path: '/users-management',
+    name: 'UsersList',
+    component: UsersList,
+    meta: { requiresAuth: true, requiresAdmin: true }
+  },
 
 {
-  path: "/listingdegat",
+  path: "/rapport",
   name: "ListingDegat",
   component: listingdegat,
 },

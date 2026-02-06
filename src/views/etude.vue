@@ -170,7 +170,13 @@
               <v-btn color="success darken-1" @click="addAyantDroit()">
                 Ajouter d'ayant droit
               </v-btn>
-              <v-btn color="success darken-1" class="ml-2" @click="openRapportForm()">
+             <v-btn
+                color="red darken-3"
+                class="ml-2 pulse-button"
+                large
+                elevation="12"
+                @click="openRapportForm()"
+              >
                 Ajouter un rapport
               </v-btn>
 
@@ -789,7 +795,13 @@
               <v-btn color="success darken-1" @click="handleClick('BodyStudy')">
                 Répartition de l'offre
               </v-btn>
-              <v-btn color="success darken-1" class="ml-2" @click="openRapportForm()">
+              <v-btn
+                color="red darken-3"
+                class="ml-2 pulse-button"
+                large
+                elevation="12"
+                @click="openRapportForm()"
+              >
                 Ajouter un rapport
               </v-btn>
 
@@ -1062,6 +1074,7 @@
           </v-card-title>
           <v-card-text>
             <v-row>
+             <input type="text" :value="materialSelectedId" />
               <!-- Formulaire identique à dégât -->
               <v-col cols="12" sm="6" md="6">
                 <v-text-field label="Pièces" v-model="degatData.documents" color="#3A1C71" filled></v-text-field>
@@ -1079,6 +1092,7 @@
               <v-col cols="12" sm="12">
                 <v-text-field label="Motif" v-model="degatData.patterns" color="#3A1C71" filled></v-text-field>
               </v-col>
+
 
               <!-- Les deux champs spécifiques au rapport -->
               <v-col cols="12" sm="6">
@@ -1123,7 +1137,13 @@
               <v-btn color="success darken-1" @click="addNewDegatToList()">
                 Ajouter un dégat
               </v-btn>
-              <v-btn color="success darken-1" class="ml-2" @click="openRapportForm()">
+             <v-btn
+                color="red darken-3"
+                class="ml-2 pulse-button"
+                large
+                elevation="12"
+                @click="openRapportForm()"
+              >
                 Ajouter un rapport
               </v-btn>
 
@@ -1175,6 +1195,7 @@
                     <td>{{ item.patterns }}</td>
                     <td>{{ item.reportReceivedDate }}</td>
                     <td>{{ item.reportProcessedDate }}</td>
+                      <td>{{ item.reportType }}</td>
                   </tr>
                 </template>
                 <template v-slot:no-data>
@@ -1283,6 +1304,9 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+      
+      
+      
         <v-dialog v-model="delAyantdroitForm" max-width="500px">
           <v-card style="border-left: 10px solid rgb(185, 55, 55)">
                         <v-card-title class="justify-center text-h5">Supprimer cette élément</v-card-title>
@@ -1922,6 +1946,7 @@
 import { mapActions, mapGetters } from "vuex";
 // import { addFilendemnity } from "@/api/user";
 import { defaultMethods, messages } from "../utils/data";
+import axios from "axios";
 import {
   addFileJson,
   // addOperationTypeForm,
@@ -1960,6 +1985,7 @@ export default {
       // "Contre expertise",
     ],
       addRapportDialog: false,
+       materialSelectedId: '',
     addFile: false,
     page: 1,
     morePayementStudyForm: false,
@@ -5560,8 +5586,10 @@ export default {
       this.victimeSelectID = item.sinisterVictim._ids
       this.getDeathStudyOffer({ id: item._id }).then(async (res) => {
         {
-          // console.log(res);
-          this.matérialSelectedId = res[0]._id
+         if (res && res.length > 0) {
+      this.matérialSelectedId = res[0]._id; // ID MaterialStudy récupéré ici
+      console.log('id',this.matérialSelectedId)
+    }
           // alert(JSON.stringify(res[0]))
           await this.getayantDroitStudyOffer({ id: res[0]._id })
           // alert(JSON.stringify(res[0].sinister.sinisterNumber));
@@ -5930,10 +5958,16 @@ export default {
         this.addFileMoreMaterial = true
     },
 
-    openRapportForm() {
-  this.degatData = {}; // Reset le modèle si nécessaire
+openRapportForm() {
+  if (!this.matérialSelectedId) {
+    this.$toast.error("Impossible de récupérer l'ID de l'étude matérielle associée.");
+    return;
+  }
+  this.degatData = {}; // reset formulaire
+  this.materialSelectedId = this.matérialSelectedId; // Assure-toi que c’est bien la variable utilisée
   this.addRapportDialog = true;
 },
+
 
 
     async RemoveAyantDroitModal() {
@@ -6572,7 +6606,7 @@ export default {
       this.getmaterialStudyOffer({ id: item._id }).then(async (res) => {
         {
           await this.getmaterialDegatStudyOffer({ id: res[0]._id })
-          console.log(res);
+          console.log('id',res);
           // alert(JSON.stringify(res[0]._id)); matérialDocLink
           this.matérialSelectedId = res[0]._id
           this.materialDamageData.sinisterNumber = res[0].sinister
@@ -6605,6 +6639,17 @@ export default {
           // this.bodyStudyOfferData = Object.assign({}, res[0]);
           this.addFileMaterial = true;
         }
+         try {
+    const res = await this.getmaterialStudyOffer({ id: item._id });
+    if (res && res.length > 0) {
+      this.matérialSelectedId = res[0]._id; // ID MaterialStudy direct
+     
+    }
+  } catch (error) {
+    console.error(error);
+  } finally {
+    this.loading = false;
+  }
       });
       this.loading = false
 
@@ -6620,8 +6665,8 @@ bodyStudyClick(item) {
     if (res && res.length > 0) {
       const data = res[0];
 
-      this.matérialSelectedId = data?._id || null;
-
+     this.matérialSelectedId = data?._id || null;
+        console.log('id', this.matérialSelectedId)
       // Données sinistre
       this.bodyStudyOfferData.sinisterNumber = data?.sinister?.sinisterNumber || "";
       this.bodyStudyOfferData.sinisterDate = data?.sinister?.sinisterDate
@@ -7922,11 +7967,17 @@ handleClickDeagat(item) {
       this.initFiles();
     },
 
+
 async submitRapportForm() {
+  console.log("materialSelectedId envoyé :", this.materialSelectedId);
+  if (!this.materialSelectedId) {
+    alert("ID de l'étude matérielle manquant.");
+    return;
+  }
   this.loading = true;
   try {
     const schema = {
-      materialStudy: this.matérialSelectedId,
+      materialStudy: this.materialSelectedId,
       documents: this.degatData.documents,
       number: this.degatData.number,
       amountRequested: this.degatData.amountRequested,
@@ -7934,26 +7985,15 @@ async submitRapportForm() {
       patterns: this.degatData.patterns,
       reportReceivedDate: this.degatData.reportReceivedDate,
       reportProcessedDate: this.degatData.reportProcessedDate,
-       reportType: this.degatData.reportType,
+      reportType: this.degatData.reportType,
     };
 
     if (this.degatData.degatID) {
-      await updateDegat({
-        schema,
-        id: this.degatData.degatID,
-      });
-
-      defaultMethods.dispatchSuccess(
-        this.$store,
-        messages.updatedSuccessfully("Rapport")
-      );
+      await updateDegat({ schema, id: this.degatData.degatID });
+      defaultMethods.dispatchSuccess(this.$store, messages.updatedSuccessfully("Rapport"));
     } else {
       await addDegat({ schema });
-
-      defaultMethods.dispatchSuccess(
-        this.$store,
-        messages.createdSuccessfully("Rapport")
-      );
+      defaultMethods.dispatchSuccess(this.$store, messages.createdSuccessfully("Rapport"));
     }
 
     this.reloadMatérialClick(this.bigStudyID);
@@ -7962,6 +8002,24 @@ async submitRapportForm() {
     defaultMethods.dispatchError(this.$store);
   } finally {
     this.loading = false;
+  }
+},
+
+
+async fetchMaterialStudies() {
+  if (!this.studyOfferId) return;
+
+  try {
+    const response = await axios.get('/materialstudy/by-studyoffer', {
+      params: { studyOffer: this.studyOfferId }
+    });
+    this.materialStudiesList = response.data.data;
+
+    if (this.materialStudiesList.length === 1) {
+      this.materialSelectedId = this.materialStudiesList[0]._id;
+    }
+  } catch (error) {
+    console.error("Erreur récupération MaterialStudy:", error);
   }
 },
 
@@ -9341,4 +9399,21 @@ td {
   cursor: pointer;
   box-shadow: inset 0 0 1em #3a1c71, 0 0 2em #eeeeee;
 }
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(244, 67, 54, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
+  }
+}
+
+.pulse-button {
+  animation: pulse 2s infinite;
+}
+
 </style>

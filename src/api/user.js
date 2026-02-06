@@ -34,20 +34,17 @@ export const addCall = ({ id, schema }) => {
         );
     });
 };
-// profile management
-export const updateUsers = ({ schema }) => {
-    // console.log(schema.email);
-
-    return new Promise((resolve, reject) => {
-        axios.put("/user/profile", schema).then(
-            (res) => {
-                resolve(res.data);
-            },
-            (error) => {
-                reject(error);
-            }
-        );
-    });
+export const updateUsers = ({ schema, id }) => {
+  return new Promise((resolve, reject) => {
+    axios.put("/user/" + id, schema, {
+      headers: {
+        // Indispensable pour que Multer "réveille" le body côté serveur
+        "Content-Type": "multipart/form-data",
+      },
+    })
+      .then(res => resolve(res.data))
+      .catch(error => reject(error));
+  });
 };
 export const updateCall = ({ schema, id }) => {
     return new Promise((resolve, reject) => {

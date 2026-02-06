@@ -241,20 +241,14 @@ export const addUsers = (schema) => {
   });
 };
 
-export const updateUsers = ({ schema, id }) => {
-  // console.log(schema.email);
-
-  return new Promise((resolve, reject) => {
-    axios.put("/user/" + id, schema).then(
-      (res) => {
-        resolve(res.data);
-      },
-      (error) => {
-        reject(error);
-      }
-    );
-  });
-};
+// Dans votre fichier API (user.js ou admin.js - gardez une seule version)
+// export const updateUsers = ({ schema, id }) => {
+//   return new Promise((resolve, reject) => {
+//     axios.put("/user/" + id, schema)
+//       .then(res => resolve(res.data))
+//       .catch(error => reject(error));
+//   });
+// };
 
 export const deleteUsers = ({ id }) => {
   // console.log(schema.email);

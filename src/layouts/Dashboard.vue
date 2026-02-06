@@ -152,19 +152,19 @@
 
                 <v-list-item-title>Référentiel</v-list-item-title>
               </v-list-item>
-<v-list-item route to="/demandecheque" class="menuButton" active-class="menuButton"> 
-  <v-list-item-icon>
-    <v-icon>mdi-cash-check</v-icon> <!-- Argent / Demande -->
-  </v-list-item-icon>
-  <v-list-item-title>Demande Mercure</v-list-item-title>
-</v-list-item>
+                <v-list-item route to="/demandecheque" class="menuButton" active-class="menuButton"> 
+                  <v-list-item-icon>
+                    <v-icon>mdi-cash-check</v-icon> <!-- Argent / Demande -->
+                  </v-list-item-icon>
+                  <v-list-item-title>Demande Mercure</v-list-item-title>
+                </v-list-item>
 
-         <v-list-item route to="/listingdegat" class="menuButton" active-class="menuButton">
-  <v-list-item-icon>
-    <v-icon>mdi-file-document-outline</v-icon> <!-- Rapport -->
-  </v-list-item-icon>
-  <v-list-item-title>Rapport</v-list-item-title>
-</v-list-item>
+                        <v-list-item route to="/rapport" class="menuButton" active-class="menuButton">
+                  <v-list-item-icon>
+                    <v-icon>mdi-file-document-outline</v-icon> <!-- Rapport -->
+                  </v-list-item-icon>
+                  <v-list-item-title>Rapport</v-list-item-title>
+                </v-list-item>
 
               <v-list-item route to="/pv" class="menuButton" active-class="menuButton">
                 <v-list-item-icon>
@@ -273,7 +273,25 @@
 
                   <v-list-item-title route :to="route" v-text="title"></v-list-item-title>
                 </v-list-item>
+
+
+                <!-- Dans votre v-list-group, ajoutez ceci APRÈS les autres items -->
+
+
               </v-list-group>
+              <!-- 🔹 NOUVEAU MENU GESTION UTILISATEURS (Admin uniquement) -->
+                <v-list-item 
+                  v-if="profile.role === 'Admin'"
+                  route 
+                  to="/users-management" 
+                  class="menuButton" 
+                  active-class="menuButton"
+                >
+                  <v-list-item-icon>
+                    <v-icon>mdi-account-multiple-outline</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-title>Gestion Utilisateurs</v-list-item-title>
+                </v-list-item>
               <!-- <v-list-item
                 route
                 to="/statistique"
@@ -535,10 +553,15 @@
                       <v-text-field outlined label="Téléphone*" color="#3A1C71" v-model="profile.phone"
                         required></v-text-field>
                     </v-col>
-                    <v-col cols="12" sm="6" md="6">
-                      <v-text-field outlined label="Post Actuel*" color="#3A1C71" v-model="profile.role"
-                        required></v-text-field>
-                    </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field 
+                      outlined 
+                      label="Post Actuel*" 
+                      color="#3A1C71" 
+                      v-model="profile.role"
+                      readonly
+                    ></v-text-field>
+                  </v-col>
                     <v-col cols="12" sm="6" md="6">
                       <v-text-field outlined type="password" prepend-inner-icon="mdi-lock" label="Mots de passe Actuels*"
                         color="#3A1C71" v-model="profile.oldPassword" required></v-text-field>
@@ -1329,7 +1352,7 @@ export default {
   name:'DashboardComponent',
   data: () => ({
     tab: null,
-    showNotifications: false,
+    showNotifications: false, 
     text:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     drawer: true,
@@ -1476,6 +1499,7 @@ export default {
     SizeDrawer: "250",
     SizeDrawers: "250",
     updateUserProfile: false,
+      idPicture: null,
     hide: true,
     hides: false,
     iconRow: "mdi-arrow-down-drop-circle-outline",
@@ -1514,6 +1538,28 @@ mounted() {
   },
   computed: {
     ...mapGetters(["UserProfile", "AdminProfile", "plaint"]),
+    profile() {
+    // 1. Logique de sélection de la source (Ta deuxième fonction)
+    const baseProfile = (this.UserProfile && this.UserProfile._id) 
+                        ? this.UserProfile 
+                        : this.AdminProfile;
+
+    // 2. Retourne l'objet enrichi pour le formulaire (Ta première fonction)
+    // On utilise l'opérateur spread (...) pour prendre tout ce qui vient de baseProfile
+    // et on ajoute/écrase les champs spécifiques pour le formulaire.
+    return {
+      ...baseProfile, // Garde _id, fullName, email, phone, role, etc.
+      _id: baseProfile?._id || '',
+      fullName: baseProfile?.fullName || '',
+      email: baseProfile?.email || '',
+      phone: baseProfile?.phone || '',
+      role: baseProfile?.role || '',
+      avatar: baseProfile?.avatar || null,
+      oldPassword: '', // Champ vide pour le formulaire
+      passwords: ''    // Champ vide pour le formulaire
+    };
+  
+  },
     isAdmin() {
       if (localStorage.getItem("admin-token")) return true;
       return false;
@@ -1522,10 +1568,10 @@ mounted() {
       if (localStorage.getItem("user-token")) return true;
       return false;
     },
-    profile() {
-      if (this.UserProfile && this.UserProfile._id) return this.UserProfile;
-      else return this.AdminProfile;
-    },
+    // profile() {
+    //   if (this.UserProfile && this.UserProfile._id) return this.UserProfile;
+    //   else return this.AdminProfile;
+    // },
     unreadNotificationsCount() {
       return this.todos.filter(n => !n.read).length;
     },
@@ -1641,36 +1687,65 @@ markNotificationAsRead(id) {
       });
       this.todos = this.plaint
     },
-    async onUpdatedUserProfile() {
-      // update
+async onUpdatedUserProfile() {
+  try {
+    let userId = this.profile?._id;
+    
+    if (!userId) {
+      alert("Erreur: ID utilisateur introuvable. Veuillez vous reconnecter.");
+      return;
+    }
 
-      try {
-        const formData = new FormData();
-        if (this.idPicture) {
-          formData.append("avatar", this.idPicture);
-        }
-        formData.append("fullName", this.profile.fullName);
-        formData.append("email", this.profile.email);
-        formData.append("phone", this.profile.phone);
-        formData.append("role", this.profile.currentPosition);
-        if (this.profile.passwords) {
-          formData.append("oldPassword", this.profile.oldPassword);
-          formData.append("password", this.profile.passwords);
-        }
+    const formData = new FormData();
+    
+    if (this.idPicture) {
+      formData.append("avatar", this.idPicture);
+    }
 
-        await updateUsers({
-          schema: formData,
-        });
+    formData.append("fullName", this.profile.fullName);
+    formData.append("email", this.profile.email);
+    formData.append("phone", this.profile.phone);
+    formData.append("role", this.profile.role); 
 
-        defaultMethods.dispatchSuccess(
-          this.$store,
-          messages.updatedSuccessfully("L'utilisateur")
-        );
-        this.logoutMethods();
-      } catch (error) {
-        alert(error);
+    if (this.profile.passwords) {
+      if (!this.profile.oldPassword) {
+        alert("Veuillez saisir votre ancien mot de passe pour le modifier.");
+        return;
       }
-    },
+      formData.append("oldPassword", this.profile.oldPassword);
+      formData.append("password", this.profile.passwords);
+    }
+
+    console.log("FormData à envoyer:", Array.from(formData.entries()));
+
+    const response = await updateUsers({
+      id: userId,
+      schema: formData,
+    });
+
+    console.log("Réponse du serveur:", response);
+
+    // 🔹 RECHARGER LE PROFIL APRÈS LA MISE À JOUR
+    await this.getUserProfile();
+
+    defaultMethods.dispatchSuccess(
+      this.$store,
+      messages.updatedSuccessfully("L'utilisateur")
+    );
+
+    this.updateUserProfile = false;
+    
+    if (this.profile.passwords) {
+       this.logoutMethods();
+    }
+    
+  } catch (error) {
+    console.error("Erreur complète:", error);
+    console.error("Réponse erreur:", error.response);
+    console.error("Message erreur:", error.response?.data);
+    alert("Erreur: " + (error.response?.data?.message || error.message));
+  }
+},
     viewDay({ date }) {
       this.focus = date;
       this.type = "day";
@@ -2073,6 +2148,11 @@ markNotificationAsRead(id) {
   }
 }
 </style>
+
+
+
+
+
 
 
 

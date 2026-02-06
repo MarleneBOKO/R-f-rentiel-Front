@@ -27,13 +27,18 @@
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="4">
-              <v-text-field
-                label="Motif"
-                v-model="filters.patterns"
-                prepend-inner-icon="mdi-magnify"
+              <v-select
+                label="Type de rapport"
+                v-model="filters.reportType"
+                :items="[
+                  { text: 'Tous', value: '' },
+                  { text: 'Matériel ', value: 'matériel' },
+                  { text: 'Corporel ', value: 'corporel' }
+                ]"
                 color="#3A1C71"
                 filled dense outlined
-              ></v-text-field>
+                clearable
+              ></v-select>
             </v-col>
           </v-row>
           <v-card-actions>
@@ -41,6 +46,15 @@
             <v-btn color="#3A1C71" outlined pill @click="fetchRapports">
               <v-icon left>mdi-magnify</v-icon> Rechercher
             </v-btn>
+                      <v-btn
+                        color="#3A1C71"
+                        outlined
+                        pill
+                        @click="downloadExcel"
+                        :loading="downloading"
+                      >
+                        <v-icon left>mdi-file-excel</v-icon> Export Excel
+                      </v-btn>
           </v-card-actions>
         </v-expansion-panel-content>
       </v-expansion-panel>
@@ -85,12 +99,14 @@ export default {
   data() {
     return {
       rapports: [],
+      downloading: false,
       loading: false,
       filters: {
         startReceivedDate: '',
         endReceivedDate: '',
         patterns: '',
-      },
+        reportType: '' ,
+      }, 
       headers: [
         { text: "Pièces", value: "documents" },
         { text: "Nombre", value: "number" },
@@ -117,6 +133,10 @@ export default {
     if (this.filters.patterns) {
       params.patterns = this.filters.patterns;
     }
+    if (this.filters.reportType) {
+      // Par exemple, reportType = 'matériel' ou 'corporel'
+     params.reportType = { $regex: `^${this.filters.reportType}$`, $options: 'i' };
+    }
 
     const res = await axios.get("/materialdamage/rapports", { params });
 
@@ -137,8 +157,42 @@ export default {
       if (!dateStr) return '';
       const date = new Date(dateStr);
       return date.toLocaleDateString("fr-FR");
+    },
+  async downloadExcel() {
+    this.downloading = true;
+    try {
+      const params = {};
+      if (this.filters.startReceivedDate) params.startReceivedDate = this.filters.startReceivedDate;
+      if (this.filters.endReceivedDate) params.endReceivedDate = this.filters.endReceivedDate;
+      if (this.filters.patterns) params.patterns = this.filters.patterns;
+
+      const response = await axios.get('/materialdamage/rapports/export', {
+        params,
+        responseType: 'blob'  // Important pour recevoir un fichier binaire
+      });
+
+      // Créer un lien de téléchargement dans le navigateur
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `rapports_${Date.now()}.xlsx`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+    } catch (error) {
+      console.error('Erreur lors du téléchargement Excel', error);
+    } finally {
+      this.downloading = false;
     }
-  },
+  }
+
+},
+
+
+
+
+  
   mounted() {
     this.fetchRapports();
   }

@@ -924,15 +924,18 @@ export default {
           }
           this.loading = false;
         },
-    async getParametreRecoursFromBackend() {
-  try {
-    const response = await this.$store.dispatch("getParametreRecours");
-    return response || { joursEntreRelances: 30, nombreRelanceAvantPenalite: 3, tauxPenalite: 3 };
-  } catch (err) {
-    console.error("Erreur chargement paramètres recours:", err);
-    return { joursEntreRelances: 30, nombreRelanceAvantPenalite: 3, tauxPenalite: 3 };
-  }
-},
+   
+   
+   
+        async getParametreRecoursFromBackend() {
+          try {
+            const response = await this.$store.dispatch("getParametreRecours");
+            return response || { joursEntreRelances: 30, nombreRelanceAvantPenalite: 3, tauxPenalite: 3 };
+          } catch (err) {
+            console.error("Erreur chargement paramètres recours:", err);
+            return { joursEntreRelances: 30, nombreRelanceAvantPenalite: 3, tauxPenalite: 3 };
+          }
+        },
 
 
 
